@@ -1,0 +1,9 @@
+*** Probes ***
+
+# THIS FILE IS MANAGED BY PUPPET
+
+<% probes.each do |probe| -%>
++ <%= probe['name'] %>
+binary = <%= probe['binary'] %>
+
+<% end -%>
