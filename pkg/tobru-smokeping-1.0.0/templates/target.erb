@@ -1,0 +1,24 @@
+<%= '+' * hierarchy_level.to_i %> <%= name %>
+<% if probe != '' then -%>
+probe = <%= probe %>
+<% end -%>
+
+menu = <%= menu %>
+<% if pagetitle != '' then -%>
+title = <%= pagetitle %>
+<% else -%>
+title = <%= menu %>
+<% end -%>
+<% if host != '' then -%>
+host = <%= host %>
+<% end -%>
+<% if alerts != [] then -%>
+alerts = <%= alerts.join(',') %>
+<% end -%>
+<% if slaves != [] then -%>
+slaves = <%= slaves.join(' ') %>
+<% end -%>
+<% if remark != '' then -%>
+remark = <%= remark %>
+<% end -%>
+
