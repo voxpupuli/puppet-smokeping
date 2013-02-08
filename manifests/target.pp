@@ -1,3 +1,31 @@
+# === Parameters
+# [*pagetitle*]
+#   Title. If empty, menu will be used as Title
+#
+# [*menu*]
+#   Menu name.
+#
+# [*hierarchy_level*]
+#   Level of this target on the menu hierarchy. (Default: 1)
+#
+# [*hierarchy_parent*]
+#   If hierarchy_level > 1, this specifies the parent
+#
+# [*probe*]
+#   Which probe to use.
+#
+# [*host*]
+#   Target host name/IP.
+#
+# [*alerts*]
+#   Array of Alerts to apply to this target
+#
+# [*slaves*]
+#   Array of slaves on which to run this target
+#
+# [*remark*]
+#   Remark displayed on Website
+#
 define smokeping::target (
     $pagetitle = '',
     $menu = '',

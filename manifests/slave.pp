@@ -1,3 +1,14 @@
+# === Parameters
+#
+# [*slave*]
+#   Location of slave
+#
+# [*display_name*]
+#   Name of the slave
+#
+# [*color*]
+#   Color of this slave
+#
 define smokeping::slave(
     $location,
     $display_name,
