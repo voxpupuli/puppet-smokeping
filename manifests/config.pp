@@ -11,6 +11,7 @@ class smokeping::config {
   $mailhost = $smokeping::mailhost
   $cgiurl = $smokeping::cgiurl
   $syslogfacility = $smokeping::syslogfacility
+  $syslogpriority = $smokeping::syslogpriority
   $daemon_user = $smokeping::daemon_user
 
   # Probes
@@ -54,12 +55,12 @@ class smokeping::config {
               color        => $slave_color,
           }
           # periodic restart to pick-up new config
-          cron {
-            'smokeping::periodic-restart':
-              command => 'PATH=$PATH:/sbin /etc/init.d/smokeping restart >/dev/null 2>&1',
-              user    => root,
-              minute  => '*/15';
-          }
+          #cron {
+          #  'smokeping::periodic-restart':
+          #    command => 'PATH=$PATH:/sbin /etc/init.d/smokeping stop >/dev/null 2>&1; sleep 2; PATH=$PATH:/sbin /etc/init.d/smokeping start >/dev/null 2>&1',
+          #    user    => root,
+          #    minute  => '*/15';
+          #}
       }
       ## Master configuration
       'master': {

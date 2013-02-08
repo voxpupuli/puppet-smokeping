@@ -27,6 +27,7 @@ class smokeping(
    $mailhost           = 'my.mail.host',
    $cgiurl             = 'http://some.url/smokeping.cgi',
    $syslogfacility     = 'local0',
+   $syslogpriority     = 'info',
    $probes             = [ { name => 'FPing', binary => '/usr/bin/fping' } ],
    $default_probe      = 'FPing',
    $alerts_to          = 'alertee@address.somewhere',
