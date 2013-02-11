@@ -3,6 +3,8 @@
 Puppet module to completely manage a SmokePing installation.
 Includes managing of Master/Slave installation and the menu hierarchy.
 
+Some background information can be found here: [Puppet module to manage SmokePing](http://tobrunet.ch/2013/02/puppet-module-to-manage-smokeping/)
+
 ## Features
 
 * Master/Slave SmokePing configuration possible
