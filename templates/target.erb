@@ -15,6 +15,9 @@ host = <%= host %>
 <% if alerts != [] then -%>
 alerts = <%= alerts.join(',') %>
 <% end -%>
+<% if nomasterpoll then -%>
+nomasterpoll = yes
+<% end -%>
 <% if slaves != [] then -%>
 slaves = <%= slaves.join(' ') %>
 <% end -%>
