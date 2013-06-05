@@ -23,6 +23,9 @@
 # [*slaves*]
 #   Array of slaves on which to run this target
 #
+# [*nomasterpoll*]
+#   Disable data-polling from master
+#
 # [*remark*]
 #   Remark displayed on Website
 #
@@ -35,6 +38,7 @@ define smokeping::target (
     $host = '',
     $alerts = [],
     $slaves = [],
+    $nomasterpoll = false,
     $remark = '',
 ) {
 
