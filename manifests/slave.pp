@@ -23,7 +23,7 @@ define smokeping::slave(
 
   $random_value = fqdn_rand(1000000)
   file { $smokeping::shared_secret:
-      mode    => 0600,
+      mode    => '0600',
       owner   => smokeping,
       group   => smokeping,
       content => $random_value,
@@ -32,20 +32,20 @@ define smokeping::slave(
       target  => $smokeping::slave_secrets,
       order   => 10,
       content => "${smokeping::slave_name}:${random_value}\n",
-      tag     => "smokeping-slave-secret",
+      tag     => 'smokeping-slave-secret',
   }
 
   $filename = "${smokeping::slave_dir}/${::hostname}"
   @@file { $filename:
       content => template('smokeping/slave.erb'),
-      tag     => "smokeping-slave",
+      tag     => 'smokeping-slave',
   }
 
   @@concat::fragment { $name:
       order   => 20,
       target  => '/etc/smokeping/config.d/Slaves',
       content => "@include ${filename}\n",
-      tag     => "smokeping-slave",
+      tag     => 'smokeping-slave',
   }
 
 }
