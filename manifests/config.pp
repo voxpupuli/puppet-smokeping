@@ -14,6 +14,7 @@ class smokeping::config {
   $syslogfacility = $smokeping::syslogfacility
   $syslogpriority = $smokeping::syslogpriority
   $daemon_user = $smokeping::daemon_user
+  $daemon_group = $smokeping::daemon_group
 
   # Probes
   $probes = $smokeping::probes
@@ -54,6 +55,19 @@ class smokeping::config {
           content => template('smokeping/alerts.erb');
       '/etc/smokeping/config.d/pathnames':
           content => template('smokeping/pathnames.erb');
+  }
+
+  ## permissions on directories
+  file {
+      $path_piddir:
+          owner => $daemon_user,
+          group => $daemon_group;
+      $path_imgcache:
+          owner => $daemon_user,
+          group => $daemon_group;
+      $path_datadir:
+          owner => $daemon_user,
+          group => $daemon_group;
   }
 
   ## mode specific
