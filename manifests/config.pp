@@ -25,7 +25,8 @@ class smokeping::config {
 
   # Targets
   $default_probe = $smokeping::default_probe
-  $remark = $smokeping::remark
+  $remark = $smokeping::cgi_remark_top
+  $title = $smokeping::cgi_title_top
 
   # Pathnames
   $path_sendmail  = $smokeping::path_sendmail

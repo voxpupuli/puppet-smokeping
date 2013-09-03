@@ -70,6 +70,9 @@
 # [*cgi_remark_top*]
 #   Remark on Website (Default: Welcome to the SmokePing website of xxx Company. Here you will learn all about the latency of our network.)
 #
+# [*cgi_title_top*]
+#   Title on Website (Default: Network Latency Grapher)
+#
 # [*targets_dir*]
 #   Where to save target definitions (Default: /etc/smokeping/config.d/targets.d)
 #
@@ -140,6 +143,7 @@ class smokeping(
     pattern => '>0%,*12*,>0%,*12*,>0%',
     comment => 'loss 3 times in a row' } ],
   $cgi_remark_top     = 'Welcome to the SmokePing website of xxx Company. Here you will learn all about the latency of our network.',
+  $cgi_title_top      = 'Network Latency Grapher',
   $targets_dir        = '/etc/smokeping/config.d/targets.d',
   $daemon_user        = 'smokeping',
   $daemon_group       = 'smokeping',
