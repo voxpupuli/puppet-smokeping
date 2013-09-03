@@ -57,19 +57,6 @@ class smokeping::config {
           content => template('smokeping/pathnames.erb');
   }
 
-  ## permissions on directories
-  file {
-      $path_piddir:
-          owner => $daemon_user,
-          group => $daemon_group;
-      $path_imgcache:
-          owner => $daemon_user,
-          group => $daemon_group;
-      $path_datadir:
-          owner => $daemon_user,
-          group => $daemon_group;
-  }
-
   ## mode specific
   case $mode {
       ## Slave configuration
