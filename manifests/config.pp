@@ -51,7 +51,7 @@ class smokeping::config {
       '/etc/smokeping/config.d/Alerts':
           content => template('smokeping/alerts.erb');
       '/etc/smokeping/config.d/pathnames':
-          content => template('pathnames.erb');
+          content => template('smokeping/pathnames.erb');
   }
 
   ## mode specific
