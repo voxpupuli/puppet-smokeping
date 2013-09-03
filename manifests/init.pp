@@ -30,6 +30,9 @@
 # [*slave_color*]
 #   Color of slave in the graph (Default: '')
 #
+# [*master_name*]
+#   Name of the master, in case of more than one SmokePing Master/Slave (Default: default)
+#
 # [*owner*]
 #   Owner of this SmokePing instance (Default: Peter Random)
 #
@@ -120,6 +123,7 @@ class smokeping(
   $slave_location     = '',
   $slave_display_name = '',
   $slave_color        = '',
+  $master_name        = 'default',
   $owner              = 'Peter Random',
   $contact            = 'some@address.nowhere',
   $mailhost           = 'my.mail.host',

@@ -4,6 +4,7 @@ class smokeping::config {
   $master_url = $smokeping::master_url
   $shared_secret = $smokeping::shared_secret
   $slave_name = $smokeping::slave_name
+  $master_name = $smokeping::master_name
 
   # General config
   $owner = $smokeping::owner
@@ -76,7 +77,7 @@ class smokeping::config {
       ## Master configuration
       'master': {
           # collect slaves
-          File <<| tag == "smokeping-slave" |>>
+          File <<| tag == "smokeping-slave-${master_name}" |>>
           file { $smokeping::slave_dir: ensure => directory; }
           concat { '/etc/smokeping/config.d/Slaves':
               owner => root,
@@ -88,17 +89,17 @@ class smokeping::config {
               order   => 10,
               content => "*** Slaves ***\nsecrets=${smokeping::slave_secrets}\n\n"
           }
-          Concat::Fragment <<| tag == "smokeping-slave" |>>
+          Concat::Fragment <<| tag == "smokeping-slave-${master_name}" |>>
 
-          #collect shared secrets from slaves
+          # collect shared secrets from slaves
           concat { $smokeping::slave_secrets:
               owner => smokeping,
               group => www-data,
               mode  => '0640',
           }
-          Concat::Fragment <<| tag == "smokeping-slave-secret" |>>
+          Concat::Fragment <<| tag == "smokeping-slave-secret-${master_name}" |>>
 
-          #create target definitions
+          # create target definitions
           file { $smokeping::targets_dir:
               ensure  => directory,
               recurse => true,

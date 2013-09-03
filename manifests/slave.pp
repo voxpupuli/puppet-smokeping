@@ -9,10 +9,14 @@
 # [*color*]
 #   Color of this slave
 #
+# [*master*]
+#   Name of the smokeping master, in case there are more than one. (Default: default)
+#
 define smokeping::slave(
     $location,
     $display_name,
     $color,
+    $master = 'default',
 ) {
 
   File {
@@ -32,20 +36,20 @@ define smokeping::slave(
       target  => $smokeping::slave_secrets,
       order   => 10,
       content => "${smokeping::slave_name}:${random_value}\n",
-      tag     => 'smokeping-slave-secret',
+      tag     => "smokeping-slave-secret-${master}",
   }
 
   $filename = "${smokeping::slave_dir}/${::hostname}"
   @@file { $filename:
       content => template('smokeping/slave.erb'),
-      tag     => 'smokeping-slave',
+      tag     => "smokeping-slave-${master}",
   }
 
   @@concat::fragment { $name:
       order   => 20,
       target  => '/etc/smokeping/config.d/Slaves',
       content => "@include ${filename}\n",
-      tag     => 'smokeping-slave',
+      tag     => "smokeping-slave-${master}",
   }
 
 }
