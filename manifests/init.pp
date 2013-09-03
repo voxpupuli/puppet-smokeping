@@ -76,6 +76,27 @@
 # [*daemon_group*]
 #   Group of SmokePing (Default: smokeping)
 #
+# [*path_sendmail*]
+#   Path to sendmail binary (Default: /usr/sbin/sendmail)
+#
+# [*path_imgcache*]
+#   Path to image cache dir (Default: /var/cache/smokeping/images)
+#
+# [*path_imgurl*]
+#   URL path to images for CGI (Default: ../smokeping/images)
+#
+# [*path_datadir*]
+#   Path to smokeping data (Default: /var/lib/smokeping)
+#
+# [*path_piddir*]
+#   Path to PID file (Default: /var/run/smokeping)
+#
+# [*path_smokemail*]
+#   Path to smokemail binary (Default: /etc/smokeping/smokemail)
+#
+# [*path_tmail*]
+#   Path to tmail binary (Default: /etc/smokeping/tmail)
+#
 # [*version*]
 #   Version which should be installed (Default: present)
 #
@@ -118,6 +139,13 @@ class smokeping(
   $targets_dir        = '/etc/smokeping/config.d/targets.d',
   $daemon_user        = 'smokeping',
   $daemon_group       = 'smokeping',
+  $path_sendmail      = '/usr/sbin/sendmail'
+  $path_imgcache      = '/var/cache/smokeping/images'
+  $path_imgurl        = '../smokeping/images'
+  $path_datadir       = '/var/lib/smokeping'
+  $path_piddir        = '/var/run/smokeping'
+  $path_smokemail     = '/etc/smokeping/smokemail'
+  $path_tmail         = '/etc/smokeping/tmail'
   $version            = 'present',
   $enable             = true,
   $start              = true,

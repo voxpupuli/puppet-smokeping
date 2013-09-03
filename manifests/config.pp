@@ -26,6 +26,15 @@ class smokeping::config {
   $default_probe = $smokeping::default_probe
   $remark = $smokeping::remark
 
+  # Pathnames
+  $path_sendmail  = $smokeping::path_sendmail
+  $path_imgcache  = $smokeping::path_imgcache
+  $path_imgurl    = $smokeping::path_imgurl
+  $path_datadir   = $smokeping::path_datadir
+  $path_piddir    = $smokeping::path_piddir
+  $path_smokemail = $smokeping::path_smokemail
+  $path_tmail     = $smokeping::path_tmail
+
   File {
     owner   => root,
     group   => root,
@@ -41,6 +50,8 @@ class smokeping::config {
           content => template('smokeping/probes.erb');
       '/etc/smokeping/config.d/Alerts':
           content => template('smokeping/alerts.erb');
+      '/etc/smokeping/config.d/pathnames':
+          content => template('pathnames.erb');
   }
 
   ## mode specific
