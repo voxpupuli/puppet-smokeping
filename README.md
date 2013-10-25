@@ -7,7 +7,7 @@ Some background information can be found here: [Puppet module to manage SmokePin
 
 ## Features
 
-* Master/Slave SmokePing configuration possible
+* Master/Slave/Standalone SmokePing configuration possible
 * Menu hierarchy implemented
 * Define Probes and Alert patterns
 * Config files managed with templates
@@ -21,10 +21,19 @@ Tested on Ubuntu 12.04 LTS
 
 ## Example
 
+### Standalone SmokePing instance
+```puppet
+# install a standalone instance on a server with default values (see init.pp for 
+# parameter documentation
+class { '::smokeping':
+    mode => 'standalone',
+}
+```
+
 ### Master SmokePing instance
 ```puppet
 # install a master instance on a server with default values (see init.pp for 
-# parameter documentation
+# parameter documentation. You must have a slave, or this will not work!
 class { '::smokeping':
     mode => 'master',
 }
