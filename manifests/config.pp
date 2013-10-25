@@ -104,25 +104,34 @@ class smokeping::config {
                         mode  => '0640',
                     }
                     Concat::Fragment <<| tag == "smokeping-slave-secret-${master_name}" |>>
-                }
+                    } else {
+                        # ensure $smokeping::slave_secret is there
+                        file {
+                            $smokeping::slave_secrets:
+                                ensure => present,
+                                owner  => smokeping,
+                                group  => www-data,
+                                mode   => '0640';
+                        }
+                    }
 
-                # create target definitions
-                file { $smokeping::targets_dir:
-                    ensure  => directory,
-                    recurse => true,
-                    purge   => true,
-                    force   => true,
-                }
-                concat { '/etc/smokeping/config.d/Targets':
-                    owner => root,
-                    group => root,
-                    mode  => '0644',
-                }
-                concat::fragment { 'targets-header':
-                    target  => '/etc/smokeping/config.d/Targets',
-                    order   => 10,
-                    content => template('smokeping/targets-header.erb'),
-                }
+                    # create target definitions
+                    file { $smokeping::targets_dir:
+                        ensure  => directory,
+                        recurse => true,
+                        purge   => true,
+                        force   => true,
+                    }
+                    concat { '/etc/smokeping/config.d/Targets':
+                        owner => root,
+                        group => root,
+                        mode  => '0644',
+                    }
+                    concat::fragment { 'targets-header':
+                        target  => '/etc/smokeping/config.d/Targets',
+                        order   => 10,
+                        content => template('smokeping/targets-header.erb'),
+                    }
             }
             default: { fail("mode ${mode} unknown") }
     }
