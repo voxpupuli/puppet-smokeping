@@ -1,33 +1,33 @@
 class smokeping::config {
 
-    $mode = $smokeping::mode
-    $master_url = $smokeping::master_url
+    $mode          = $smokeping::mode
+    $master_url    = $smokeping::master_url
     $shared_secret = $smokeping::shared_secret
-    $slave_name = $smokeping::slave_name
-    $master_name = $smokeping::master_name
+    $slave_name    = $smokeping::slave_name
+    $master_name   = $smokeping::master_name
 
     # General config
-    $owner = $smokeping::owner
-    $contact = $smokeping::contact
-    $mailhost = $smokeping::mailhost
-    $cgiurl = $smokeping::cgiurl
+    $owner          = $smokeping::owner
+    $contact        = $smokeping::contact
+    $mailhost       = $smokeping::mailhost
+    $cgiurl         = $smokeping::cgiurl
     $syslogfacility = $smokeping::syslogfacility
     $syslogpriority = $smokeping::syslogpriority
-    $daemon_user = $smokeping::daemon_user
-    $daemon_group = $smokeping::daemon_group
+    $daemon_user    = $smokeping::daemon_user
+    $daemon_group   = $smokeping::daemon_group
 
     # Probes
     $probes = $smokeping::probes
 
     # Alerts
-    $alerts_to = $smokeping::alerts_to
+    $alerts_to   = $smokeping::alerts_to
     $alerts_from = $smokeping::alerts_from
-    $alerts = $smokeping::alerts
+    $alerts      = $smokeping::alerts
 
     # Targets
-    $default_probe = $smokeping::default_probe
+    $default_probe  = $smokeping::default_probe
     $cgi_remark_top = $smokeping::cgi_remark_top
-    $cgi_title_top = $smokeping::cgi_title_top
+    $cgi_title_top  = $smokeping::cgi_title_top
 
     # Pathnames
     $path_sendmail  = $smokeping::path_sendmail
@@ -39,9 +39,9 @@ class smokeping::config {
     $path_tmail     = $smokeping::path_tmail
 
     File {
-        owner   => root,
-        group   => root,
-        mode    => '0644',
+        owner => root,
+        group => root,
+        mode  => '0644',
     }
 
     file {
