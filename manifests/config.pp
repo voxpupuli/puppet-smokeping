@@ -16,6 +16,10 @@ class smokeping::config {
     $daemon_user    = $smokeping::daemon_user
     $daemon_group   = $smokeping::daemon_group
 
+    # The owner of the image files (written by the webserver)
+    $webserver_user  = $smokeping::webserver_user
+    $webserver_group = $smokeping::webserver_group
+
     # Probes
     $probes = $smokeping::probes
 
@@ -100,7 +104,7 @@ class smokeping::config {
                     # collect shared secrets from slaves
                     concat { $smokeping::slave_secrets:
                         owner => smokeping,
-                        group => www-data,
+                        group => $webserver_group,
                         mode  => '0640',
                     }
                     Concat::Fragment <<| tag == "smokeping-slave-secret-${master_name}" |>>
@@ -110,7 +114,7 @@ class smokeping::config {
                             $smokeping::slave_secrets:
                                 ensure => present,
                                 owner  => smokeping,
-                                group  => www-data,
+                                group  => $webserver_group,
                                 mode   => '0640';
                         }
                     }

@@ -85,6 +85,12 @@
 # [*path_sendmail*]
 #   Path to sendmail binary (Default: /usr/sbin/sendmail)
 #
+# [*webserver_user*]
+#   User of webserver, owner of image-files  (Default: www-data)
+#
+# [*webserver_group*]
+#   Group of webserver (Default: www-data)
+#
 # [*path_imgcache*]
 #   Path to image cache dir (Default: /var/cache/smokeping/images)
 #
@@ -126,6 +132,8 @@ class smokeping(
     $slave_location     = '',
     $slave_display_name = '',
     $slave_color        = '',
+    $webserver_user     = 'www-data',
+    $webserver_group    = 'www-data',
     $master_name        = 'default',
     $owner              = 'Peter Random',
     $contact            = 'some@address.nowhere',
