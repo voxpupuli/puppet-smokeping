@@ -4,7 +4,7 @@
 #
 # === Parameters
 # [*mode*]
-#   SmokePing mode: master or slave (Default: master)
+#   SmokePing mode: master or slave or standalone (Default: master)
 #
 # [*master_url*]
 #   URL to master cgi for slave mode (Default: http://somewhere/cgi-bin/smokeping.cgi)
@@ -85,6 +85,12 @@
 # [*path_sendmail*]
 #   Path to sendmail binary (Default: /usr/sbin/sendmail)
 #
+# [*webserver_user*]
+#   User of webserver, owner of image-files  (Default: www-data)
+#
+# [*webserver_group*]
+#   Group of webserver (Default: www-data)
+#
 # [*path_imgcache*]
 #   Path to image cache dir (Default: /var/cache/smokeping/images)
 #
@@ -117,49 +123,51 @@
 # Tobias Brunner <tobias.brunner@nine.ch>
 #
 class smokeping(
-  $mode               = 'master',
-  $master_url         = 'http://somewhere/cgi-bin/smokeping.cgi',
-  $shared_secret      = '/etc/smokeping/slavesecrets.conf',
-  $slave_secrets      = '/etc/smokeping/smokeping_secrets',
-  $slave_name         = 'slave1',
-  $slave_dir          = '/etc/smokeping/config.d/slaves.d',
-  $slave_location     = '',
-  $slave_display_name = '',
-  $slave_color        = '',
-  $master_name        = 'default',
-  $owner              = 'Peter Random',
-  $contact            = 'some@address.nowhere',
-  $mailhost           = 'my.mail.host',
-  $cgiurl             = 'http://some.url/smokeping.cgi',
-  $syslogfacility     = 'local0',
-  $syslogpriority     = 'info',
-  $probes             = [ { name => 'FPing', binary => '/usr/bin/fping' } ],
-  $default_probe      = 'FPing',
-  $alerts_to          = 'alertee@address.somewhere',
-  $alerts_from        = 'smokealert@company.xy',
-  $alerts             = [ {
-    name    => 'someloss',
-    type    => 'loss',
-    pattern => '>0%,*12*,>0%,*12*,>0%',
-    comment => 'loss 3 times in a row' } ],
-  $cgi_remark_top     = 'Welcome to the SmokePing website of xxx Company. Here you will learn all about the latency of our network.',
-  $cgi_title_top      = 'Network Latency Grapher',
-  $targets_dir        = '/etc/smokeping/config.d/targets.d',
-  $daemon_user        = 'smokeping',
-  $daemon_group       = 'smokeping',
-  $path_sendmail      = '/usr/sbin/sendmail',
-  $path_imgcache      = '/var/cache/smokeping/images',
-  $path_imgurl        = '../smokeping/images',
-  $path_datadir       = '/var/lib/smokeping',
-  $path_piddir        = '/var/run/smokeping',
-  $path_smokemail     = '/etc/smokeping/smokemail',
-  $path_tmail         = '/etc/smokeping/tmail',
-  $version            = 'present',
-  $enable             = true,
-  $start              = true,
+    $mode               = 'master',
+    $master_url         = 'http://somewhere/cgi-bin/smokeping.cgi',
+    $shared_secret      = '/etc/smokeping/slavesecrets.conf',
+    $slave_secrets      = '/etc/smokeping/smokeping_secrets',
+    $slave_name         = 'slave1',
+    $slave_dir          = '/etc/smokeping/config.d/slaves.d',
+    $slave_location     = '',
+    $slave_display_name = '',
+    $slave_color        = '',
+    $webserver_user     = 'www-data',
+    $webserver_group    = 'www-data',
+    $master_name        = 'default',
+    $owner              = 'Peter Random',
+    $contact            = 'some@address.nowhere',
+    $mailhost           = 'my.mail.host',
+    $cgiurl             = 'http://some.url/smokeping.cgi',
+    $syslogfacility     = 'local0',
+    $syslogpriority     = 'info',
+    $probes             = [ { name => 'FPing', binary => '/usr/bin/fping' } ],
+    $default_probe      = 'FPing',
+    $alerts_to          = 'alertee@address.somewhere',
+    $alerts_from        = 'smokealert@company.xy',
+    $alerts             = [ {
+        name    => 'someloss',
+        type    => 'loss',
+        pattern => '>0%,*12*,>0%,*12*,>0%',
+        comment => 'loss 3 times in a row' } ],
+        $cgi_remark_top     = 'Welcome to the SmokePing website of xxx Company. Here you will learn all about the latency of our network.',
+        $cgi_title_top      = 'Network Latency Grapher',
+        $targets_dir        = '/etc/smokeping/config.d/targets.d',
+        $daemon_user        = 'smokeping',
+        $daemon_group       = 'smokeping',
+        $path_sendmail      = '/usr/sbin/sendmail',
+        $path_imgcache      = '/var/cache/smokeping/images',
+        $path_imgurl        = '../smokeping/images',
+        $path_datadir       = '/var/lib/smokeping',
+        $path_piddir        = '/var/run/smokeping',
+        $path_smokemail     = '/etc/smokeping/smokemail',
+        $path_tmail         = '/etc/smokeping/tmail',
+        $version            = 'present',
+        $enable             = true,
+        $start              = true,
 ) {
-  class{'smokeping::install': } ->
-  class{'smokeping::config': } ~>
-  class{'smokeping::service': } ->
-  Class['smokeping']
+    class{'smokeping::install': } ->
+    class{'smokeping::config': } ~>
+    class{'smokeping::service': } ->
+    Class['smokeping']
 }
