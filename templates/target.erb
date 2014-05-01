@@ -12,7 +12,7 @@ title = <%= menu %>
 <% if host != '' then -%>
 host = <%= host %>
 <% end -%>
-<% if alerts != [] then -%>
+<% if alerts != false then -%>
 alerts = <%= alerts.join(',') %>
 <% end -%>
 <% if nomasterpoll then -%>
