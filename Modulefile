@@ -8,4 +8,5 @@ description 'Puppet module to completely manage a SmokePing installation. Includ
 project_page 'https://github.com/tobru/puppet-smokeping'
 
 ## Add dependencies, if any:
-dependency 'ripienaar/concat'
+dependency 'puppetlabs/concat'
+dependency 'puppetlabs/stdlib'

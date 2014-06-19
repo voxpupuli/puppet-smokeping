@@ -40,7 +40,18 @@ define smokeping::target (
     $slaves = [],
     $nomasterpoll = false,
     $remark = '',
+    $options = {},
 ) {
+    validate_string( $pagetitle )
+    validate_string( $menu )
+    validate_string( $hierarchy_parent )
+    validate_string( $probe )
+    validate_string( $host )
+    validate_array( $alerts )
+    validate_array( $slaves )
+    validate_bool( $nomasterpoll )
+    validate_string( $remark )
+    validate_hash( $options )
 
     $filename = "${smokeping::targets_dir}/${hierarchy_level}-${name}"
     concat { $filename:
