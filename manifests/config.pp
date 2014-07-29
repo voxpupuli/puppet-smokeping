@@ -79,65 +79,65 @@ class smokeping::config {
             #    user    => root,
             #    minute  => '*/15';
             #}
+        }
+        ## Master/Standalone configuration
+        ## collect slaves if mode is master and create Targets
+        ## if mode is standalone, just create targets...
+        /^(master|standalone)$/: {
+
+            if $mode =~ /^master$/ {
+                # collect slaves
+                File <<| tag == "smokeping-slave-${master_name}" |>>
+                file { $smokeping::slave_dir: ensure => directory; }
+                concat { '/etc/smokeping/config.d/Slaves':
+                    owner => root,
+                    group => root,
+                    mode  => '0644',
+                }
+                concat::fragment { 'slaves-header':
+                    target  => '/etc/smokeping/config.d/Slaves',
+                    order   => 10,
+                    content => "*** Slaves ***\nsecrets=${smokeping::slave_secrets}\n\n"
+                }
+                Concat::Fragment <<| tag == "smokeping-slave-${master_name}" |>>
+
+                # collect shared secrets from slaves
+                concat { $smokeping::slave_secrets:
+                    owner => smokeping,
+                    group => $webserver_group,
+                    mode  => '0640',
+                }
+                Concat::Fragment <<| tag == "smokeping-slave-secret-${master_name}" |>>
+            } else {
+                # ensure $smokeping::slave_secret is there
+                file {
+                    $smokeping::slave_secrets:
+                        ensure => present,
+                        owner  => smokeping,
+                        group  => $webserver_group,
+                        mode   => '0640';
+                }
             }
-            ## Master/Standalone configuration
-            ## collect slaves if mode is master and create Targets
-            ## if mode is standalone, just create targets...
-            /^(master|standalone)$/: {
 
-                if $mode == 'master' {
-                    # collect slaves
-                    File <<| tag == "smokeping-slave-${master_name}" |>>
-                    file { $smokeping::slave_dir: ensure => directory; }
-                    concat { '/etc/smokeping/config.d/Slaves':
-                        owner => root,
-                        group => root,
-                        mode  => '0644',
-                    }
-                    concat::fragment { 'slaves-header':
-                        target  => '/etc/smokeping/config.d/Slaves',
-                        order   => 10,
-                        content => "*** Slaves ***\nsecrets=${smokeping::slave_secrets}\n\n"
-                    }
-                    Concat::Fragment <<| tag == "smokeping-slave-${master_name}" |>>
-
-                    # collect shared secrets from slaves
-                    concat { $smokeping::slave_secrets:
-                        owner => smokeping,
-                        group => $webserver_group,
-                        mode  => '0640',
-                    }
-                    Concat::Fragment <<| tag == "smokeping-slave-secret-${master_name}" |>>
-                    } else {
-                        # ensure $smokeping::slave_secret is there
-                        file {
-                            $smokeping::slave_secrets:
-                                ensure => present,
-                                owner  => smokeping,
-                                group  => $webserver_group,
-                                mode   => '0640';
-                        }
-                    }
-
-                    # create target definitions
-                    file { $smokeping::targets_dir:
-                        ensure  => directory,
-                        recurse => true,
-                        purge   => true,
-                        force   => true,
-                    }
-                    concat { '/etc/smokeping/config.d/Targets':
-                        owner => root,
-                        group => root,
-                        mode  => '0644',
-                    }
-                    concat::fragment { 'targets-header':
-                        target  => '/etc/smokeping/config.d/Targets',
-                        order   => 10,
-                        content => template('smokeping/targets-header.erb'),
-                    }
+            # create target definitions
+            file { $smokeping::targets_dir:
+                ensure  => directory,
+                recurse => true,
+                purge   => true,
+                force   => true,
             }
-            default: { fail("mode ${mode} unknown") }
+            concat { '/etc/smokeping/config.d/Targets':
+                owner => root,
+                group => root,
+                mode  => '0644',
+            }
+            concat::fragment { 'targets-header':
+                target  => '/etc/smokeping/config.d/Targets',
+                order   => 10,
+                content => template('smokeping/targets-header.erb'),
+            }
+        }
+        default: { fail("mode ${mode} unknown") }
     }
 
 }
