@@ -1,5 +1,5 @@
 name 'tobru-smokeping'
-version '1.0.0'
+version '1.5.0'
 source 'https://github.com/tobru/puppet-smokeping'
 author 'tobru'
 license 'Apache 2.0'
