@@ -17,7 +17,8 @@ Some background information can be found here: [Puppet module to manage SmokePin
 Tested on Ubuntu 12.04 LTS
 
 ## Dependencies
-  - [puppet-concat](https://github.com/ripienaar/puppet-concat)
+  - [puppetlabs-concat](https://github.com/puppetlabs/puppet-concat)
+  - [puppetlabs-stdlib](https://github.com/puppetlabs/puppet-stdlib)
 
 ## Example
 
@@ -114,6 +115,16 @@ smokeping::target { 'GoogleCHIPv6':
     host             => 'google.ch',
     probe            => 'FPing6'
     slaves           => ['slave1'],
+}
+smokeping::target { 'GoogleCHCurl':
+    hierarchy_parent => 'GoogleCH',
+    hierarchy_level  => 3,
+    menu             => 'google.ch Curl',
+    host             => 'google.ch',
+    probe            => 'Curl',
+    options          => {
+      urlformat => 'http://%host%/',
+    }
 }
 ```
 

@@ -24,4 +24,10 @@ slaves = <%= slaves.join(' ') %>
 <% if remark != '' then -%>
 remark = <%= remark %>
 <% end -%>
+<% if options then -%>
+<%- options.sort.each do |key,value| -%>
+<%= key %> = <%= value %>
+<%- end -%>
+<% end -%>
+
 
