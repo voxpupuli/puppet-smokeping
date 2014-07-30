@@ -138,7 +138,4 @@ Licensed under Apache License, Version 2.0, Copyright 2013 by Tobias Brunner
 
 ## Contibutors
 
-The following nice peoples have contributed to this puppet module:
-
-* Andreas Jaggi: @x-way
-* André Timmermann: @darktim
+See: [Github Contributors](https://github.com/tobru/puppet-smokeping/graphs/contributors)
