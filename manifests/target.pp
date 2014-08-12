@@ -42,6 +42,7 @@ define smokeping::target (
     $remark = '',
     $options = {},
 ) {
+    validate_re( $name, '^[^[:space:]]+$', 'Target name cannot contain whitespace.' )
     validate_string( $pagetitle )
     validate_string( $menu )
     validate_string( $hierarchy_parent )
