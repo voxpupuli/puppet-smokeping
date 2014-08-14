@@ -5,5 +5,10 @@
 <% probes.each do |probe| -%>
 + <%= probe['name'] %>
 binary = <%= probe['binary'] %>
+<% if probe['options'] then -%>
+<%- probe['options'].sort.each do |key,value| -%>
+<%= key %> = <%= value %>
+<% end -%>
+<% end -%>
 
 <% end -%>
