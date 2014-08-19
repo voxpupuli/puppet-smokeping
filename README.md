@@ -132,7 +132,7 @@ smokeping::target { 'GoogleCHCurl':
 
 The module is written by
 
-* Tobias Brunner <tobias.brunner@nine.ch>
+* Tobias Brunner <tobias@tobru.ch>
 
 Licensed under Apache License, Version 2.0, Copyright 2013 by Tobias Brunner
 
