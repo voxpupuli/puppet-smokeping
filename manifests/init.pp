@@ -141,7 +141,7 @@ class smokeping(
     $cgiurl             = 'http://some.url/smokeping.cgi',
     $syslogfacility     = 'local0',
     $syslogpriority     = 'info',
-    $probes             = [ { name => 'FPing', binary => '/usr/bin/fping' } ],
+    $probes             = [ { name => 'FPing', binary => '/usr/bin/fping', step => '300' } ],
     $default_probe      = 'FPing',
     $alerts_to          = 'alertee@address.somewhere',
     $alerts_from        = 'smokealert@company.xy',
