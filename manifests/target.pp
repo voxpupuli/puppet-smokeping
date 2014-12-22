@@ -36,7 +36,7 @@ define smokeping::target (
     $hierarchy_parent = '',
     $probe = '',
     $host = '',
-    $alerts = false,
+    $alerts = [],
     $slaves = [],
     $nomasterpoll = false,
     $remark = '',
