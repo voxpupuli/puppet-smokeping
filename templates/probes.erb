@@ -2,7 +2,7 @@
 
 # THIS FILE IS MANAGED BY PUPPET
 
-<% probes.each do |probe| -%>
+<% @probes.each do |probe| -%>
 + <%= probe.delete('name') %>
 <% probe.each_pair do |k,v| -%>
 <%= k %> = <%= v %>

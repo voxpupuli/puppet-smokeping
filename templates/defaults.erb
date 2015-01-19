@@ -1,11 +1,11 @@
 # THIS FILE IS MANAGED BY PUPPET
 # /etc/default/smokeping: Startup configuration for smokeping(1)
 
-MODE=<%= mode %>
-DAEMON_USER=<%= daemon_user %>
+MODE=<%= @mode %>
+DAEMON_USER=<%= @daemon_user %>
 
-<% if mode == 'slave' then -%>
-MASTER_URL=<%= master_url %>
-SHARED_SECRET=<%= shared_secret %>
-SLAVE_NAME=<%= slave_name %>
+<% if @mode == 'slave' then -%>
+MASTER_URL=<%= @master_url %>
+SHARED_SECRET=<%= @shared_secret %>
+SLAVE_NAME=<%= @slave_name %>
 <% end -%>

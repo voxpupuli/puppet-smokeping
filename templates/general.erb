@@ -2,11 +2,11 @@
 
 ## THIS FILE IS MANAGED BY PUPPET
 
-owner          = <%= owner %>
-contact        = <%= contact %>
-mailhost       = <%= mailhost %>
-cgiurl         = <%= cgiurl %>
-syslogfacility = <%= syslogfacility %>
-syslogpriority = <%= syslogpriority %>
+owner          = <%= @owner %>
+contact        = <%= @contact %>
+mailhost       = <%= @mailhost %>
+cgiurl         = <%= @cgiurl %>
+syslogfacility = <%= @syslogfacility %>
+syslogpriority = <%= @syslogpriority %>
 
 @include /etc/smokeping/config.d/pathnames
