@@ -6,7 +6,7 @@ from=<%= @alerts_from %>
 
 <% @alerts.each do |alert| -%>
 + <%= alert['name'] %>
-type = <%= alert['type'] %>
+type = <%= alert['alert_type'] %>
 pattern = <%= alert['pattern'] %>
 comment = <%= alert['comment'] %>
 
