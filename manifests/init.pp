@@ -62,10 +62,10 @@
 #
 # [*alerts*]
 #   Alert definitions as Array of Hashes (Default:
-#   { name    => 'someloss',
-#     type    => 'loss',
-#     pattern => '>0%,*12*,>0%,*12*,>0%',
-#     comment => 'loss 3 times in a row' } )
+#   { name          => 'someloss',
+#     alert_type    => 'loss',
+#     pattern       => '>0%,*12*,>0%,*12*,>0%',
+#     comment       => 'loss 3 times in a row' } )
 #
 # [*cgi_remark_top*]
 #   Remark on Website (Default: Welcome to the SmokePing website of xxx Company. Here you will learn all about the latency of our network.)
