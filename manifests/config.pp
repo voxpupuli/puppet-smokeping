@@ -65,7 +65,6 @@ class smokeping::config {
     case $mode {
         ## Slave configuration
         'slave': {
-
             # Check if slave_display_name is unset.
             # --> use FQDN if not set.
             if $smokeping::slave_display_name == '' {
@@ -74,11 +73,16 @@ class smokeping::config {
                 $display_name = $smokeping::slave_display_name
             }
 
-            if $smokeping::slave_color == '' { $slave_color = sprintf('%06d', fqdn_rand('999999')) }
+            if $smokeping::slave_color == '' { 
+               $slave_color = sprintf('%06d', fqdn_rand('999999')) 
+            } else {
+               $slave_color = $smokeping::slave_color
+            }
+
             smokeping::slave { $::fqdn:
                 location     => $smokeping::slave_location,
                 display_name => $display_name,
-                color        => $smokeping::slave_color,
+                color        => $slave_color,
             }
             # periodic restart to pick-up new config
             #cron {
