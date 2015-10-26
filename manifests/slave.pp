@@ -28,8 +28,8 @@ define smokeping::slave(
   $random_value = fqdn_rand(1000000)
   file { $smokeping::shared_secret:
       mode    => '0600',
-      owner   => smokeping,
-      group   => smokeping,
+      owner   => $smokeping::daemon_user,
+      group   => $smokeping::daemon_group,
       content => $random_value,
   }
   @@concat::fragment { "${::fqdn}-secret":

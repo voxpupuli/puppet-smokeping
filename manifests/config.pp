@@ -103,7 +103,7 @@ class smokeping::config {
 
                 # collect shared secrets from slaves
                 concat { $smokeping::slave_secrets:
-                    owner => smokeping,
+                    owner => $daemon_user,
                     group => $webserver_group,
                     mode  => '0640',
                 }
@@ -113,7 +113,7 @@ class smokeping::config {
                 file {
                     $smokeping::slave_secrets:
                         ensure => present,
-                        owner  => smokeping,
+                        owner  => $daemon_user,
                         group  => $webserver_group,
                         mode   => '0640';
                 }
