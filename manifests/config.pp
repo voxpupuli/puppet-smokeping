@@ -32,6 +32,7 @@ class smokeping::config {
     $default_probe  = $smokeping::default_probe
     $cgi_remark_top = $smokeping::cgi_remark_top
     $cgi_title_top  = $smokeping::cgi_title_top
+    $targets        = $smokeping::targets
 
     # Pathnames
     $path_sendmail  = $smokeping::path_sendmail
@@ -136,6 +137,7 @@ class smokeping::config {
                 order   => 10,
                 content => template('smokeping/targets-header.erb'),
             }
+            create_resources("smokeping::target", $targets, {})
         }
         default: { fail("mode ${mode} unknown") }
     }

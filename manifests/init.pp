@@ -76,6 +76,9 @@
 # [*targets_dir*]
 #   Where to save target definitions (Default: /etc/smokeping/config.d/targets.d)
 #
+# [*targets*]
+#   Target definitions as a Hash of Smokeping::Target (Default: {})
+#
 # [*daemon_user*]
 #   User to run SmokePing (Default: smokeping)
 #
@@ -153,6 +156,7 @@ class smokeping(
     $cgi_remark_top     = 'Welcome to the SmokePing website of xxx Company. Here you will learn all about the latency of our network.',
     $cgi_title_top      = 'Network Latency Grapher',
     $targets_dir        = '/etc/smokeping/config.d/targets.d',
+    $targets            = {},
     $daemon_user        = 'smokeping',
     $daemon_group       = 'smokeping',
     $path_sendmail      = '/usr/sbin/sendmail',
