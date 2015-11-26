@@ -48,17 +48,50 @@ class smokeping::config {
         mode  => '0644',
     }
 
+    file { '/etc/smokeping/config.d':
+      ensure  => directory,
+      recurse => true,
+      purge   => true,
+      force   => true,
+    } ->
+
     file {
-        '/etc/default/smokeping':
-            content => template('smokeping/defaults.erb');
-        '/etc/smokeping/config.d/General':
-            content => template('smokeping/general.erb');
-        '/etc/smokeping/config.d/Probes':
-            content => template('smokeping/probes.erb');
+        '/etc/smokeping/config':
+            content => template('smokeping/config.erb');
         '/etc/smokeping/config.d/Alerts':
             content => template('smokeping/alerts.erb');
+        '/etc/smokeping/config.d/Database':
+            content => template('smokeping/database.erb');
+        '/etc/smokeping/config.d/General':
+            content => template('smokeping/general.erb');
         '/etc/smokeping/config.d/pathnames':
             content => template('smokeping/pathnames.erb');
+        '/etc/smokeping/config.d/Presentation':
+            content => template('smokeping/presentation.erb');
+        '/etc/smokeping/config.d/Probes':
+            content => template('smokeping/probes.erb');
+        '/etc/smokeping/config.d/Slaves':
+            content => template('smokeping/slaves.erb');
+    }
+
+    ## Platform Specific
+    if $::osfamily == 'Debian' or $::operatingsystem == 'Ubuntu' {
+      # Defaults file allows smokeping to be launched in different modes (eg slave vs master)
+      file { '/etc/default/smokeping':
+        content => template('smokeping/defaults.erb');
+      }
+    } else {
+      # TODO: Add master/slave support to non-Debian distros
+      #
+      # We don't yet support modes other than standalone on other platforms
+      # such as RHEL - to offer it, we need to start replacing the systemd
+      # service file loaded by the package manager with a custom one that
+      # has the alternative parameters set, like in the default file above
+      # for Debian/Ubuntu systems.
+
+      if ($mode != 'standalone') {
+        fail('Currently master/slave mode not supported for this OS family')
+      }
     }
 
     ## mode specific
