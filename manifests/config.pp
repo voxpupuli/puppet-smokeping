@@ -66,11 +66,16 @@ class smokeping::config {
         ## Slave configuration
         'slave': {
             if $smokeping::slave_display_name == '' { $display_name = $::fqdn }
-            if $smokeping::slave_color == '' { $slave_color = sprintf('%06d', fqdn_rand('999999')) }
+            if $smokeping::slave_color == '' { 
+               $slave_color = sprintf('%06d', fqdn_rand('999999')) 
+            } else {
+               $slave_color = $smokeping::slave_color
+            }
+
             smokeping::slave { $::fqdn:
                 location     => $smokeping::slave_location,
                 display_name => $smokeping::display_name,
-                color        => $smokeping::slave_color,
+                color        => $slave_color,
             }
             # periodic restart to pick-up new config
             #cron {
