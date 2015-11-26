@@ -7,8 +7,8 @@ class smokeping::install {
     if ! defined (Package['fping']) {
         package {'fping': ensure => installed; }
     }
-    if ! defined (Package[$smokeping::package_perldoc]) {
-        package {$smokeping::package_perldoc: ensure => installed; }
+    if ! defined (Package[$smokeping::params::package_perldoc]) {
+        package {$smokeping::params::package_perldoc: ensure => installed; }
     }
 
     # correct permissions
