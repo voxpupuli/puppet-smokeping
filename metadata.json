@@ -1,6 +1,6 @@
 {
   "name": "tobru-smokeping",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "author": "tobru",
   "license": "Apache-2.0",
   "summary": "SmokePing module for master/slave or single instance",
