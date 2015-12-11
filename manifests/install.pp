@@ -1,5 +1,6 @@
 class smokeping::install {
-
+    include smokeping::params
+    
     package { 'smokeping':
         ensure => $smokeping::version
     }
