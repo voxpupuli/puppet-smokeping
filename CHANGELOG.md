@@ -2,10 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased][unreleased]
-### Changed
-
+## [1.7.1] - 2015-11-12
 ### Fixed
+- Future parser compatibility. Thanks to @dvorak
+- Slave configuration fixes. Thanks to @fetzerms
+- Initial RedHat/CentOS support. Thanks to @jethrocarr
+- Better Hiera support. Thanks to @vincentbernat
+- Other small fixes
 
 ## [1.7.0] - 2015-02-19
 ### Added

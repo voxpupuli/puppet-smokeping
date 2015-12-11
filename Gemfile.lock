@@ -49,6 +49,3 @@ DEPENDENCIES
   puppet (>= 3.3)
   puppet-lint (>= 1.0.0)
   puppetlabs_spec_helper (>= 0.8.2)
-
-BUNDLED WITH
-   1.10.6
