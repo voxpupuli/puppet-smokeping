@@ -71,8 +71,6 @@ class smokeping::config {
             content => template('smokeping/presentation.erb');
         '/etc/smokeping/config.d/Probes':
             content => template('smokeping/probes.erb');
-        '/etc/smokeping/config.d/Slaves':
-            content => template('smokeping/slaves.erb');
     }
 
     ## Platform Specific
