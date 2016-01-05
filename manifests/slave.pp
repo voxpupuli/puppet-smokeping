@@ -35,7 +35,7 @@ define smokeping::slave(
   @@concat::fragment { "${::fqdn}-secret":
       target  => $smokeping::slave_secrets,
       order   => 10,
-      content => "${smokeping::slave_name}:${random_value}\n",
+      content => "${::fqdn}:${random_value}\n",
       tag     => "smokeping-slave-secret-${master}",
   }
 
