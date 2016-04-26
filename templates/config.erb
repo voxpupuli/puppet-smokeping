@@ -3,5 +3,7 @@
 @include /etc/smokeping/config.d/Database
 @include /etc/smokeping/config.d/Presentation
 @include /etc/smokeping/config.d/Probes
+<% if @mode == 'master' -%>
 @include /etc/smokeping/config.d/Slaves
+<% end -%>
 @include /etc/smokeping/config.d/Targets
