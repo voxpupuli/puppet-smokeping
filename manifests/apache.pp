@@ -61,10 +61,12 @@ class smokeping::apache {
 
   # Configure apache
   include ::apache
+  include ::apache::mod::perl
   apache::vhost { 'smokeping':
-    servername  => $servername,
-    docroot     => $docroot,
-    directories => $directories,
-    aliases     => $aliases,
+    servername     => $servername,
+    docroot        => $docroot,
+    directories    => $directories,
+    aliases        => $aliases,
+    directoryindex => 'smokeping.cgi',
   }
 }
