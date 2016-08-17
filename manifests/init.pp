@@ -171,6 +171,7 @@ class smokeping(
     $start              = true,
     $manage_apache      = false,
     $manage_firewall    = false,
+    $servername         = $::fqdn,
 ) {
 
     if $manage_apache {
