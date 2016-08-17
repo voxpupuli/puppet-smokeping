@@ -3,7 +3,7 @@ class smokeping::apache {
   $servername = $::smokeping::servername
 
   $docroot = $::osfamily ? {
-    'RedHat' => '/usr/share/smokeping/htdocs',
+    'RedHat' => '/usr/share/smokeping/cgi',
     'Debian' => '/usr/share/smokeping/www',
   }
 
