@@ -170,10 +170,24 @@ class smokeping(
     $enable             = true,
     $start              = true,
     $manage_apache      = false,
+    $manage_firewall    = false,
 ) {
 
     if $manage_apache {
       include ::smokeping::apache
+    }
+
+    if $manage_firewall {
+      firewall { '100-smokeping-http':
+        proto  => 'tcp',
+        dport  => '80',
+        action => 'accept',
+      }
+      firewall { '100-smokeping-https':
+        proto  => 'tcp',
+        dport  => '443',
+        action => 'accept',
+      }
     }
 
     class{'smokeping::install': } ->
