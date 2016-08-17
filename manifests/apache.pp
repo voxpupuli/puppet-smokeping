@@ -43,11 +43,11 @@ class smokeping::apache {
     'RedHat' => [
       {
         'path'    => '/usr/share/smokeping',
-        'require' => 'local',
+        'require' => 'all granted',
       },
       {
         'path'    => '/var/lib/smokeping',
-        'require' => 'local',
+        'require' => 'all granted',
       },
     ],
     'Debian' => [
