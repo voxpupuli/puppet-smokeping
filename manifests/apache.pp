@@ -3,7 +3,7 @@ class smokeping::apache {
   $servername = $::smokeping::servername
 
   $docroot = $::osfamily ? {
-    'RedHat' => '/usr/share/smokeping/cgi',
+    'RedHat' => '/usr/share/smokeping/htdocs',
     'Debian' => '/usr/share/smokeping/www',
   }
 
@@ -18,14 +18,14 @@ class smokeping::apache {
         'alias' => '/smokeping',
         'path'  => '/usr/share/smokeping/htdocs',
       },
-      {
-        'scriptalias' => '/smokeping/sm.cgi',
-        'path'        => '/usr/share/smokeping/cgi/smokeping.fcgi',
-      },
 #      {
-#        scriptalias => '/smokeping/sm.cgi',
-#        path        => '/usr/share/smokeping/cgi/smokeping_cgi',
+#        'scriptalias' => '/smokeping/sm.cgi',
+#        'path'        => '/usr/share/smokeping/cgi/smokeping.fcgi',
 #      },
+      {
+        scriptalias => '/smokeping/sm.cgi',
+        path        => '/usr/share/smokeping/cgi/smokeping_cgi',
+      },
     ],
     'Debian' => [
       {
