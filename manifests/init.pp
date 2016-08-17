@@ -169,7 +169,13 @@ class smokeping(
     $version            = 'present',
     $enable             = true,
     $start              = true,
+    $manage_apache      = false,
 ) {
+
+    if $manage_apache {
+      include ::smokeping::apache
+    }
+
     class{'smokeping::install': } ->
     class{'smokeping::config': } ~>
     class{'smokeping::service': } ->
