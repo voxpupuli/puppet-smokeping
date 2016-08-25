@@ -26,6 +26,14 @@ class smokeping::apache {
         scriptalias => '/smokeping/sm.cgi',
         path        => '/usr/share/smokeping/cgi/smokeping_cgi',
       },
+      {
+        scriptalias => '/smokeping/smokeping.cgi',
+        path        => '/usr/share/smokeping/cgi/smokeping_cgi',
+      },
+      {
+        scriptalias => '/smokeping.cgi',
+        path        => '/usr/share/smokeping/cgi/smokeping_cgi',
+      },
     ],
     'Debian' => [
       {
@@ -43,8 +51,10 @@ class smokeping::apache {
   $directories = $::osfamily ? {
     'RedHat' => [
       {
-        'path'    => '/usr/share/smokeping',
-        'require' => 'all granted',
+        'path'     => '/usr/share/smokeping/htdocs',
+        'require'  => 'all granted',
+        'options'  => '+FollowSymLinks +Indexes',
+        'override' => 'All',
       },
       {
         'path'    => '/var/lib/smokeping',
