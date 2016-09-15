@@ -9,5 +9,6 @@ from=<%= @alerts_from %>
 type = <%= alert['alert_type'] %>
 pattern = <%= alert['pattern'] %>
 comment = <%= alert['comment'] %>
+edgetrigger = <%= alert['edgetrigger'] ? 'yes' : 'no' %>
 
 <% end -%>

@@ -35,6 +35,7 @@ class smokeping::params {
       name              => 'someloss',
       alert_type        => 'loss',
       pattern           => '>0%,*12*,>0%,*12*,>0%',
+      edgetrigger       => false,
       comment           => 'loss 3 times in a row',
       } ]
 
