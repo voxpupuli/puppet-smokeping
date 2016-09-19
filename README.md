@@ -75,20 +75,21 @@ Class['::smokeping'] {
 ### Alerts
 ```puppet
 $alerts = [ {
-  { name     => 'bigloss',
-  alert_type => 'loss',
-  pattern    => '==0%,==0%,==0%,==0%,>0%,>0%,>0%',
-  comment    => 'suddenly there is packet loss' },
+  { name      => 'bigloss',
+  alert_type  => 'loss',
+  pattern     => '==0%,==0%,==0%,==0%,>0%,>0%,>0%',
+  comment     => 'suddenly there is packet loss' },
 
-  { name     => 'startloss',
-  alert_type => 'loss',
-  pattern    => '==S,>0%,>0%,>0%',
-  comment    => 'loss at startup' },
+  { name      => 'startloss',
+  alert_type  => 'loss',
+  pattern     => '==S,>0%,>0%,>0%',
+  comment     => 'loss at startup' },
 
-  { name     => 'noloss',
-  alert_type => 'loss',
-  pattern    => '>0%,>0%,>0%,==0%,==0%,==0%,==0%',
-  comment    => 'there was loss and now its reachable again' },
+  { name      => 'noloss',
+  alert_type  => 'loss',
+  pattern     => '>0%,>0%,>0%,==0%,==0%,==0%,==0%',
+  edgetrigger => true
+  comment     => 'there was loss and now its reachable again' },
 ] }
 Class['::smokeping'] {
   alerts => $alerts
