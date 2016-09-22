@@ -120,6 +120,14 @@
 #
 # [*start*]
 #   Should the service be started by Puppet? (Default: true)
+# [*smanage_apache*]
+#   Should we manage the Apache config with puppetlabs/apache? (Default: false)
+#
+# [*smanage_firewall*]
+#   Should we manage a firewall rule for Smokeping with puppetlabs/firewall? (Default: false)
+#
+# [*smanage_selinux*]
+#   Should we load an SELinux policy to allow Smokeping to work on Red Hat distros? (Default: false)
 #
 # === Author
 #
@@ -171,6 +179,7 @@ class smokeping(
     $start              = true,
     $manage_apache      = false,
     $manage_firewall    = false,
+    $manage_selinux     = false,
     $servername         = $::fqdn,
 ) {
 
@@ -188,6 +197,15 @@ class smokeping(
         proto  => 'tcp',
         dport  => '443',
         action => 'accept',
+      }
+    }
+
+    if $manage_selinux {
+      if $::osfamily == 'RedHat' {
+        selinux::module { 'local_smokeping':
+          ensure => 'present',
+          source => 'puppet:///modules/smokeping/local_smokeping.te',
+        }
       }
     }
 
