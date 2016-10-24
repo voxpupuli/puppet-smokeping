@@ -56,10 +56,11 @@ define smokeping::target (
 
     $filename = "${smokeping::targets_dir}/${hierarchy_level}-${name}"
     concat { $filename:
-        owner  => root,
-        group  => root,
-        mode   => '0644',
-        notify => Class['smokeping::service'],
+        owner   => root,
+        group   => root,
+        mode    => '0644',
+        require => File[$::smokeping::targets_dir],
+        notify  => Class['smokeping::service'],
     }
     concat::fragment { "target-definition-${hierarchy_level}-${name}":
         target  => $filename,
