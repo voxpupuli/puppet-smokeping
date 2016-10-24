@@ -1,0 +1,20 @@
+module local_smokeping 1.4;
+
+require {
+	type httpd_t;
+	type smokeping_cgi_script_t;
+	type smokeping_var_lib_t;
+	type var_lib_t;
+
+	class dir { add_name read write };
+	class file { create getattr ioctl open read write };
+	class process { noatsecure rlimitinh siginh };
+}
+
+#============= httpd_t ==============
+allow httpd_t smokeping_cgi_script_t:process { noatsecure rlimitinh siginh };
+allow httpd_t smokeping_var_lib_t:dir { read };
+
+#============= smokeping_cgi_script_t ==============
+allow smokeping_cgi_script_t var_lib_t:dir { add_name read write };
+allow smokeping_cgi_script_t var_lib_t:file { create getattr ioctl open read write };
