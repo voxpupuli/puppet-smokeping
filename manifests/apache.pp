@@ -41,7 +41,7 @@ class smokeping::apache {
         'path'  => '/usr/share/smokeping/www',
       },
       {
-        'scriptalias' => '/smokeping/smokeping.cgi',
+        'scriptalias' => '/cgi-bin/smokeping.cgi',
         'path'        => '/usr/lib/cgi-bin/smokeping.cgi',
       },
     ],
@@ -72,7 +72,7 @@ class smokeping::apache {
   # Configure apache
   include ::apache
   include ::apache::mod::perl
-  apache::vhost { 'smokeping':
+  apache::vhost { $servername:
     servername     => $servername,
     docroot        => $docroot,
     directories    => $directories,
