@@ -26,7 +26,7 @@ class smokeping::params {
     $syslogpriority     = 'info'
     $cgi_remark_top     = 'Welcome to the SmokePing website of xxx Company. Here you will learn all about the latency of our network.'
     $cgi_title_top      = 'Network Latency Grapher'
-
+    
     $probes             = [ { name => 'FPing', binary => '/usr/bin/fping', step => '300' } ]
     $default_probe      = 'FPing'
     $alerts_to          = 'root@localhost'

@@ -73,6 +73,9 @@
 # [*cgi_title_top*]
 #   Title on Website (Default: Network Latency Grapher)
 #
+# [*preformatted_files*]
+#   Any files that contain preformatted TARGET definitions that can be includes in the primary config file
+#
 # [*targets_dir*]
 #   Where to save target definitions (Default: /etc/smokeping/config.d/targets.d)
 #
@@ -120,13 +123,13 @@
 #
 # [*start*]
 #   Should the service be started by Puppet? (Default: true)
-# [*smanage_apache*]
+# [*manage_apache*]
 #   Should we manage the Apache config with puppetlabs/apache? (Default: false)
 #
-# [*smanage_firewall*]
+# [*manage_firewall*]
 #   Should we manage a firewall rule for Smokeping with puppetlabs/firewall? (Default: false)
 #
-# [*smanage_selinux*]
+# [*manage_selinux*]
 #   Should we load an SELinux policy to allow Smokeping to work on Red Hat distros? (Default: false)
 #
 # === Author
@@ -163,6 +166,7 @@ class smokeping(
         comment    => 'loss 3 times in a row' } ],
     $cgi_remark_top     = 'Welcome to the SmokePing website of xxx Company. Here you will learn all about the latency of our network.',
     $cgi_title_top      = 'Network Latency Grapher',
+    $preformatted_files = [],
     $targets_dir        = '/etc/smokeping/config.d/targets.d',
     $targets            = {},
     $daemon_user        = 'smokeping',

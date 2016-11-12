@@ -7,3 +7,6 @@
 @include /etc/smokeping/config.d/Slaves
 <% end -%>
 @include /etc/smokeping/config.d/Targets
+<% @preformatted_files.each do |val| -%>
+@include <%= val %>
+<% end -%>

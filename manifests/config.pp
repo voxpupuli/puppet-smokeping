@@ -33,6 +33,7 @@ class smokeping::config {
     $cgi_remark_top = $smokeping::cgi_remark_top
     $cgi_title_top  = $smokeping::cgi_title_top
     $targets        = $smokeping::targets
+    $preformatted_files = $smokeping::preformatted_files
 
     # Pathnames
     $path_sendmail  = $smokeping::path_sendmail
