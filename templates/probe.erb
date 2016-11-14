@@ -13,5 +13,10 @@ pings = <%= @pings %>
 <% if @steps then -%>
 steps = <%= @steps %>
 <% end -%>
+<% if @options then -%>
+<%- @options.sort.each do |key,value| -%>
+<%= key %> = <%= value %>
+<%- end -%>
+<% end -%>
 
 
