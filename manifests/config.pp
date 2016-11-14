@@ -70,8 +70,6 @@ class smokeping::config {
             content => template('smokeping/pathnames.erb');
         '/etc/smokeping/config.d/Presentation':
             content => template('smokeping/presentation.erb');
-        '/etc/smokeping/config.d/Probes':
-            content => template('smokeping/probes.erb');
     }
 
     ## Platform Specific
@@ -182,6 +180,25 @@ class smokeping::config {
                 content => template('smokeping/targets-header.erb'),
             }
             create_resources("smokeping::target", $targets, {})
+
+            # create probes definitions
+            file { $smokeping::probes_dir:
+                ensure  => directory,
+                recurse => true,
+                purge   => true,
+                force   => true,
+            }
+            concat { '/etc/smokeping/config.d/Probes':
+                owner => root,
+                group => root,
+                mode  => '0644',
+            }
+            concat::fragment { 'probes-header':
+                target  => '/etc/smokeping/config.d/Probes',
+                order   => 10,
+                content => template('smokeping/probes-header.erb'),
+            }
+            create_resources("smokeping::probe", $probes, {})
         }
         default: { fail("mode ${mode} unknown") }
     }
