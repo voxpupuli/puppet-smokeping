@@ -63,13 +63,18 @@ master using exported resources.
 
 ### Probes
 ```puppet
-$probes = [
-    { name => 'FPing', binary => '/usr/bin/fping' },
-    { name => 'FPing6', binary => '/usr/bin/fping6' },
-]
-Class['::smokeping'] {
-  probes => $probes
-}
+  smokeping::probe { 'FPing':
+   binary => '/usr/bin/fping',
+  }
+```
+
+Probe instances can be defined by referencing a parent probe.
+
+```puppet
+  smokeping::probe { 'FPingShort':
+   parent => 'FPing',
+   pings => '5',
+  }
 ```
 
 ### Alerts

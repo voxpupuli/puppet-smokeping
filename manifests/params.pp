@@ -27,7 +27,6 @@ class smokeping::params {
     $cgi_remark_top     = 'Welcome to the SmokePing website of xxx Company. Here you will learn all about the latency of our network.'
     $cgi_title_top      = 'Network Latency Grapher'
     
-    $probes             = [ { name => 'FPing', binary => '/usr/bin/fping', step => '300' } ]
     $default_probe      = 'FPing'
     $alerts_to          = 'root@localhost'
     $alerts_from        = 'root@localhost'
@@ -41,6 +40,7 @@ class smokeping::params {
 
     # /etc/smokeping appears to be generally consistent cross-platform
     $targets_dir        = '/etc/smokeping/config.d/targets.d'
+    $probes_dir         = '/etc/smokeping/config.d/probes.d'
     $path_smokemail     = '/etc/smokeping/smokemail'
     $path_tmail         = '/etc/smokeping/tmail'
 

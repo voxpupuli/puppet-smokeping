@@ -49,7 +49,10 @@
 #   Syslog Facility (Default: local0)
 #
 # [*probes*]
-#   Probe definitions as Array of Hashes (Default: { name => 'FPing', binary => '/usr/bin/fping' })
+#   Probe definitions as a Hash of Smokeping::Probe (Default: {})
+#
+# [*probes_dir*]
+#   Where to save probe definitions (Default: /etc/smokeping/config.d/probes.d)
 #
 # [*default_probe*]
 #   Default Probe (Default: FPing)
@@ -155,7 +158,8 @@ class smokeping(
     $cgiurl             = 'http://some.url/smokeping.cgi',
     $syslogfacility     = 'local0',
     $syslogpriority     = 'info',
-    $probes             = [ { name => 'FPing', binary => '/usr/bin/fping', step => '300' } ],
+    $probes             = {},
+    $probes_dir         = '/etc/smokeping/config.d/probes.d',
     $default_probe      = 'FPing',
     $alerts_to          = 'root@localhost',
     $alerts_from        = 'root@localhost',
