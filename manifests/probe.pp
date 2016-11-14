@@ -57,9 +57,9 @@ define smokeping::probe (
     ## called 'FPing' is required. 
     if $name == 'FPing' {
 				  	file { "${smokeping::probes_dir}/FPing__subprobe-workaround":
-				  			mode    => '0600',
-				  			owner   => $smokeping::daemon_user,
-				  			group   => $smokeping::daemon_group,
+				  			mode    => '0644',
+				  			owner   => root,
+				  			group   => root,
 				  			content => '++ FPing',
 						}
 						concat::fragment { "probe-subprobe-workaround":
