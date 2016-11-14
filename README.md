@@ -68,12 +68,35 @@ master using exported resources.
   }
 ```
 
-Probe instances can be defined by referencing a parent probe.
+The 'base' options for probes are 'binary', 'offset' and 'pings', as described
+in the [Offical Smokeping Docs](http://oss.oetiker.ch/smokeping/probe/base.en.html)
+For probe specific options, define them in an 'options' hash
+
+```puppet
+  smokeping::probe { 'DNS':
+   binary => '/usr/bin/dig',
+   step => '180',
+   pings => '5',
+   options  => {
+      lookup => 'google.com',
+   }
+  }
+
+```
+
+Probe instances (aka sub probes) can be defined by referencing a parent probe.
 
 ```puppet
   smokeping::probe { 'FPingShort':
    parent => 'FPing',
    pings => '5',
+  }
+
+  smokeping::probe { 'FPingLargePackets':
+   parent => 'FPing',
+   options  => {
+      packetsize => '5000',
+   }
   }
 ```
 
