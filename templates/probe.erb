@@ -1,0 +1,17 @@
+<% if @parent == '' then -%>+ <%= @name %>
+<% else -%>++ <%= @name %> 
+<% end -%>
+<% if @binary != '' then -%>
+binary = <%= @binary %>
+<% end -%>
+<% if @offset then -%>
+offset = <%= @offset %>
+<% end -%>
+<% if @pings then -%>
+pings = <%= @pings %>
+<% end -%>
+<% if @steps then -%>
+steps = <%= @steps %>
+<% end -%>
+
+
