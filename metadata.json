@@ -1,12 +1,12 @@
 {
-  "name": "tobru-smokeping",
-  "version": "1.7.2",
-  "author": "tobru",
+  "name": "puppet-smokeping",
+  "version": "2.0.0-rc0",
+  "author": "Vox Pupuli",
   "license": "Apache-2.0",
   "summary": "SmokePing module for master/slave or single instance",
-  "source": "https://github.com/tobru/puppet-smokeping",
-  "project_page": "https://forge.puppetlabs.com/tobru/smokeping",
-  "issues_url": "https://github.com/tobru/puppet-smokeping/issues",
+  "source": "https://github.com/voxpupuli/puppet-smokeping",
+  "project_page": "https://forge.puppetlabs.com/puppet/smokeping",
+  "issues_url": "https://github.com/voxpupuli/puppet-smokeping/issues",
   "tags": ["monitoring", "network", "rrdtool", "ping"],
   "operatingsystem_support": [
     {
@@ -16,9 +16,15 @@
   ],
   "dependencies": [
     { "name": "puppetlabs/stdlib", "version_requirement": ">=3.2.0 <5.0.0" },
-    { "name": "puppetlabs/concat", "version_requirement": ">= 1.0.0" },
-    { "name": "puppetlabs/apache", "version_requirement": ">= 1.0.0" },
-    { "name": "puppetlabs/firewall", "version_requirement": ">= 1.0.0" },
-    { "name": "jfryman/selinux", "version_requirement": ">= 0.4.0" }
+    { "name": "puppetlabs/concat", "version_requirement": ">= 1.0.0 <3.0.0" },
+    { "name": "puppetlabs/apache", "version_requirement": ">= 1.0.0 <2.0.0" },
+    { "name": "puppetlabs/firewall", "version_requirement": ">= 1.0.0 <2.0.0" },
+    { "name": "puppet/selinux", "version_requirement": ">= 0.4.1 <1.0.0" }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 3.7.0 < 5.0.0"
+    }
   ]
 }
