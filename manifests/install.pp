@@ -1,37 +1,38 @@
 class smokeping::install {
-    include smokeping::params
-    
-    package { 'smokeping':
-        ensure => $smokeping::version
-    }
+  include ::smokeping::params
 
-    if ! defined (Package['fping']) {
-        package {'fping': ensure => installed; }
-    }
-    if ! defined (Package[$smokeping::params::package_perldoc]) {
-        package {$smokeping::params::package_perldoc: ensure => installed; }
-    }
+  package { 'smokeping':
+    ensure => $smokeping::version,
+  }
 
-    # correct permissions
-    file {
-        $smokeping::path_datadir:
-            ensure  => directory,
-            owner   => $smokeping::daemon_user,
-            group   => $smokeping::daemon_group,
-            require => Package['smokeping'],
-            recurse => true;
-        $smokeping::path_piddir:
-            ensure  => directory,
-            owner   => $smokeping::daemon_user,
-            group   => $smokeping::daemon_group,
-            require => Package['smokeping'],
-            recurse => true;
-        $smokeping::path_imgcache:
-            ensure  => directory,
-            owner   => $smokeping::webserver_user,
-            group   => $smokeping::webserver_group,
-            require => Package['smokeping'],
-            recurse => true;
-    }
+  if ! defined (Package['fping']) {
+    ensure_packages(['fping'])
+  }
+  if ! defined (Package[$smokeping::params::package_perldoc]) {
+    ensure_packages([$smokeping::params::package_perldoc])
+  }
+
+  # correct permissions
+  file { $smokeping::path_datadir:
+    ensure  => directory,
+    owner   => $smokeping::daemon_user,
+    group   => $smokeping::daemon_group,
+    require => Package['smokeping'],
+    recurse => true,
+  }
+  file { $smokeping::path_piddir:
+    ensure  => directory,
+    owner   => $smokeping::daemon_user,
+    group   => $smokeping::daemon_group,
+    require => Package['smokeping'],
+    recurse => true,
+  }
+  file { $smokeping::path_imgcache:
+    ensure  => directory,
+    owner   => $smokeping::webserver_user,
+    group   => $smokeping::webserver_group,
+    require => Package['smokeping'],
+    recurse => true,
+  }
 
 }

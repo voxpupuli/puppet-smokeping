@@ -23,16 +23,16 @@ class smokeping::apache {
 #        'path'        => '/usr/share/smokeping/cgi/smokeping.fcgi',
 #      },
       {
-        scriptalias => '/smokeping/sm.cgi',
-        path        => '/usr/share/smokeping/cgi/smokeping_cgi',
+        'scriptalias' => '/smokeping/sm.cgi',
+        'path'        => '/usr/share/smokeping/cgi/smokeping_cgi',
       },
       {
-        scriptalias => '/smokeping/smokeping.cgi',
-        path        => '/usr/share/smokeping/cgi/smokeping_cgi',
+        'scriptalias' => '/smokeping/smokeping.cgi',
+        'path'        => '/usr/share/smokeping/cgi/smokeping_cgi',
       },
       {
-        scriptalias => '/smokeping.cgi',
-        path        => '/usr/share/smokeping/cgi/smokeping_cgi',
+        'scriptalias' => '/smokeping.cgi',
+        'path'        => '/usr/share/smokeping/cgi/smokeping_cgi',
       },
     ],
     'Debian' => [
