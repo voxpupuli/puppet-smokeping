@@ -134,83 +134,89 @@
 # Tobias Brunner <tobias.brunner@nine.ch>
 #
 class smokeping(
-    $mode               = 'master',
-    $master_url         = 'http://somewhere/cgi-bin/smokeping.cgi',
-    $shared_secret      = '/etc/smokeping/slavesecrets.conf',
-    $slave_secrets      = '/etc/smokeping/smokeping_secrets',
-    $slave_name         = 'slave1',
-    $slave_dir          = '/etc/smokeping/config.d/slaves.d',
-    $slave_location     = '',
-    $slave_display_name = '',
-    $slave_color        = '',
-    $webserver_user     = 'www-data',
-    $webserver_group    = 'www-data',
-    $master_name        = 'default',
-    $owner              = 'Peter Random',
-    $contact            = 'root@localhost',
-    $mailhost           = 'my.mail.host',
-    $cgiurl             = 'http://some.url/smokeping.cgi',
-    $syslogfacility     = 'local0',
-    $syslogpriority     = 'info',
-    $probes             = [ { name => 'FPing', binary => '/usr/bin/fping', step => '300' } ],
-    $default_probe      = 'FPing',
-    $alerts_to          = 'root@localhost',
-    $alerts_from        = 'root@localhost',
-    $alerts             = [ {
-        name       => 'someloss',
-        alert_type => 'loss',
-        pattern    => '>0%,*12*,>0%,*12*,>0%',
-        comment    => 'loss 3 times in a row' } ],
-    $cgi_remark_top     = 'Welcome to the SmokePing website of xxx Company. Here you will learn all about the latency of our network.',
-    $cgi_title_top      = 'Network Latency Grapher',
-    $targets_dir        = '/etc/smokeping/config.d/targets.d',
-    $targets            = {},
-    $daemon_user        = 'smokeping',
-    $daemon_group       = 'smokeping',
-    $path_sendmail      = '/usr/sbin/sendmail',
-    $path_imgcache      = '/var/cache/smokeping/images',
-    $path_imgurl        = '../smokeping/images',
-    $path_datadir       = '/var/lib/smokeping',
-    $path_piddir        = '/var/run/smokeping',
-    $path_smokemail     = '/etc/smokeping/smokemail',
-    $path_tmail         = '/etc/smokeping/tmail',
-    $version            = 'present',
-    $enable             = true,
-    $start              = true,
-    $manage_apache      = false,
-    $manage_firewall    = false,
-    $manage_selinux     = false,
-    $servername         = $::fqdn,
+  $mode               = 'master',
+  $master_url         = 'http://somewhere/cgi-bin/smokeping.cgi',
+  $shared_secret      = '/etc/smokeping/slavesecrets.conf',
+  $slave_secrets      = '/etc/smokeping/smokeping_secrets',
+  $slave_name         = 'slave1',
+  $slave_dir          = '/etc/smokeping/config.d/slaves.d',
+  $slave_location     = '',
+  $slave_display_name = '',
+  $slave_color        = '',
+  $webserver_user     = 'www-data',
+  $webserver_group    = 'www-data',
+  $master_name        = 'default',
+  $owner              = 'Peter Random',
+  $contact            = 'root@localhost',
+  $mailhost           = 'my.mail.host',
+  $cgiurl             = 'http://some.url/smokeping.cgi',
+  $syslogfacility     = 'local0',
+  $syslogpriority     = 'info',
+  $probes             = [ { name => 'FPing', binary => '/usr/bin/fping', step => '300' } ],
+  $default_probe      = 'FPing',
+  $alerts_to          = 'root@localhost',
+  $alerts_from        = 'root@localhost',
+  $alerts             = [
+    {
+      name       => 'someloss',
+      alert_type => 'loss',
+      pattern    => '>0%,*12*,>0%,*12*,>0%',
+      comment    => 'loss 3 times in a row'
+    },
+  ],
+  $cgi_remark_top     = 'Welcome to the SmokePing website of xxx Company. Here you will learn all about the latency of our network.',
+  $cgi_title_top      = 'Network Latency Grapher',
+  $targets_dir        = '/etc/smokeping/config.d/targets.d',
+  $targets            = {},
+  $daemon_user        = 'smokeping',
+  $daemon_group       = 'smokeping',
+  $path_sendmail      = '/usr/sbin/sendmail',
+  $path_imgcache      = '/var/cache/smokeping/images',
+  $path_imgurl        = '../smokeping/images',
+  $path_datadir       = '/var/lib/smokeping',
+  $path_piddir        = '/var/run/smokeping',
+  $path_smokemail     = '/etc/smokeping/smokemail',
+  $path_tmail         = '/etc/smokeping/tmail',
+  $version            = 'present',
+  $enable             = true,
+  $start              = true,
+  $manage_apache      = false,
+  $manage_firewall    = false,
+  $manage_selinux     = false,
+  $servername         = $::fqdn,
 ) {
 
-    if $manage_apache {
-      include ::smokeping::apache
-    }
+  if $manage_apache {
+    include ::smokeping::apache
+  }
 
-    if $manage_firewall {
-      firewall { '100-smokeping-http':
-        proto  => 'tcp',
-        dport  => '80',
-        action => 'accept',
-      }
-      firewall { '100-smokeping-https':
-        proto  => 'tcp',
-        dport  => '443',
-        action => 'accept',
+  if $manage_firewall {
+    firewall { '100-smokeping-http':
+      proto  => 'tcp',
+      dport  => '80',
+      action => 'accept',
+    }
+    firewall { '100-smokeping-https':
+      proto  => 'tcp',
+      dport  => '443',
+      action => 'accept',
+    }
+  }
+
+  if $manage_selinux {
+    if $::osfamily == 'RedHat' {
+      selinux::module { 'local_smokeping':
+        ensure => 'present',
+        source => 'puppet:///modules/smokeping/local_smokeping.te',
       }
     }
+  }
 
-    if $manage_selinux {
-      if $::osfamily == 'RedHat' {
-        selinux::module { 'local_smokeping':
-          ensure => 'present',
-          source => 'puppet:///modules/smokeping/local_smokeping.te',
-        }
-      }
-    }
+  contain ::smokeping::install
+  contain ::smokeping::config
+  contain ::smokeping::service
 
-    class{'smokeping::install': } ->
-    class{'smokeping::config': } ~>
-    class{'smokeping::service': } ->
-    Class['smokeping']
+  Class['smokeping::install'] ->
+  Class['smokeping::config'] ~>
+  Class['smokeping::service']
 }
