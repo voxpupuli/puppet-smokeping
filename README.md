@@ -74,25 +74,31 @@ Class['::smokeping'] {
 
 ### Alerts
 ```puppet
-$alerts = [ {
-  { name      => 'bigloss',
-  alert_type  => 'loss',
-  pattern     => '==0%,==0%,==0%,==0%,>0%,>0%,>0%',
-  comment     => 'suddenly there is packet loss' },
+$alerts = [ 
+  { 
+    name        => 'bigloss',
+    alert_type  => 'loss',
+    pattern     => '==0%,==0%,==0%,==0%,>0%,>0%,>0%',
+    comment     => 'suddenly there is packet loss',
+  },
 
-  { name      => 'startloss',
-  alert_type  => 'loss',
-  pattern     => '==S,>0%,>0%,>0%',
-  comment     => 'loss at startup' },
+  { 
+    name        => 'startloss',
+    alert_type  => 'loss',
+    pattern     => '==S,>0%,>0%,>0%',
+    comment     => 'loss at startup',
+  },
 
-  { name      => 'noloss',
-  alert_type  => 'loss',
-  pattern     => '>0%,>0%,>0%,==0%,==0%,==0%,==0%',
-  edgetrigger => true
-  comment     => 'there was loss and now its reachable again' },
-] }
+  { 
+    name        => 'noloss',
+    alert_type  => 'loss',
+    pattern     => '>0%,>0%,>0%,==0%,==0%,==0%,==0%',
+    edgetrigger => true,
+    comment     => 'there was loss and now its reachable again',
+  },
+] 
 Class['::smokeping'] {
-  alerts => $alerts
+  alerts => $alerts,
 }
 ```
 
@@ -102,7 +108,7 @@ Class['::smokeping'] {
 smokeping::target { 'World':
     menu      => 'World',
     pagetitle => 'Connection to the World',
-    alerts    => [ 'bigloss', 'noloss' ]
+    alerts    => [ 'bigloss', 'noloss' ],
 }
 
 smokeping::target { 'GoogleCH':
@@ -123,7 +129,7 @@ smokeping::target { 'GoogleCHIPv6':
     hierarchy_level  => 3,
     menu             => 'google.ch IPv6',
     host             => 'google.ch',
-    probe            => 'FPing6'
+    probe            => 'FPing6',
     slaves           => ['slave1'],
 }
 smokeping::target { 'GoogleCHCurl':
