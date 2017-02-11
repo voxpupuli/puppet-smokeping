@@ -1,17 +1,25 @@
 {
   "name": "puppet-smokeping",
-  "version": "2.0.0",
+  "version": "2.0.1-rc0",
   "author": "Vox Pupuli",
   "license": "Apache-2.0",
   "summary": "SmokePing module for master/slave or single instance",
   "source": "https://github.com/voxpupuli/puppet-smokeping",
   "project_page": "https://forge.puppetlabs.com/puppet/smokeping",
   "issues_url": "https://github.com/voxpupuli/puppet-smokeping/issues",
-  "tags": ["monitoring", "network", "rrdtool", "ping"],
+  "tags": [
+    "monitoring",
+    "network",
+    "rrdtool",
+    "ping"
+  ],
   "operatingsystem_support": [
     {
       "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [ "12.04", "14.04" ]
+      "operatingsystemrelease": [
+        "12.04",
+        "14.04"
+      ]
     }
   ],
   "dependencies": [
