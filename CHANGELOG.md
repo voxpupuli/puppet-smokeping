@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2017-02-11 Release 2.0.0
+
+This is the last release with Puppet3 support!
+* Only include `/etc/smokeping/conf.d/Slaves` when mode is master
+* Add support for managing firewall rules
+* Add edgetrigger option to smokeping alerts
+* Bump puppet minimum version_requirement to 3.8.7
+
 ## [1.7.1] - 2015-11-12
 ### Fixed
 - Future parser compatibility. Thanks to @dvorak
