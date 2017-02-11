@@ -1,6 +1,6 @@
 {
   "name": "puppet-smokeping",
-  "version": "2.0.1-rc0",
+  "version": "3.0.0-rc0",
   "author": "Vox Pupuli",
   "license": "Apache-2.0",
   "summary": "SmokePing module for master/slave or single instance",
@@ -17,7 +17,6 @@
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "12.04",
         "14.04"
       ]
     }
@@ -25,7 +24,7 @@
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">=4.6.0 <5.0.0"
+      "version_requirement": ">= 4.6.0 <5.0.0"
     },
     {
       "name": "puppetlabs/concat",
@@ -47,7 +46,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 3.8.7 < 5.0.0"
+      "version_requirement": ">= 4.6.1 < 5.0.0"
     }
   ]
 }
