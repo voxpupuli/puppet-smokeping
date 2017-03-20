@@ -6,7 +6,7 @@ from=<%= @alerts_from %>
 
 <% @alerts.each do |alert| -%>
 + <%= alert['name'] %>
-type = <%= alert['alert_type'] %>
+type = <%= alert['type'] %>
 pattern = <%= alert['pattern'] %>
 comment = <%= alert['comment'] %>
 edgetrigger = <%= alert['edgetrigger'] ? 'yes' : 'no' %>
