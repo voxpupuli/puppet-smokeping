@@ -5,9 +5,6 @@ class smokeping::install {
         ensure => $smokeping::version
     }
 
-    if ! defined (Package['fping']) {
-        package {'fping': ensure => installed; }
-    }
     if ! defined (Package[$smokeping::params::package_perldoc]) {
         package {$smokeping::params::package_perldoc: ensure => installed; }
     }
