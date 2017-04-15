@@ -54,9 +54,9 @@ class smokeping::config {
     recurse => true,
     purge   => true,
     force   => true,
-  } ->
+  }
 
-  file {
+  -> file {
     '/etc/smokeping/config':
       content => template('smokeping/config.erb');
     '/etc/smokeping/config.d/Alerts':
