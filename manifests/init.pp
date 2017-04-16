@@ -216,7 +216,7 @@ class smokeping(
   contain ::smokeping::config
   contain ::smokeping::service
 
-  Class['smokeping::install'] ->
-  Class['smokeping::config'] ~>
-  Class['smokeping::service']
+  Class['smokeping::install']
+  -> Class['smokeping::config']
+  ~> Class['smokeping::service']
 }
