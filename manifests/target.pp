@@ -30,29 +30,20 @@
 #   Remark displayed on Website
 #
 define smokeping::target (
-    $pagetitle = '',
-    $menu = '',
-    $hierarchy_level = 1,
-    $hierarchy_parent = '',
-    $probe = '',
-    $host = '',
-    $alerts = [],
-    $slaves = [],
-    $nomasterpoll = false,
-    $remark = '',
-    $options = {},
+  String $pagetitle,
+  String $menu,
+  String $hierarchy_parent,
+  String $probe,
+  String $host,
+  String $remark,
+  Integer $hierarchy_level = 1,
+  Array $alerts            = [],
+  Array $slaves            = [],
+  Boolean $nomasterpoll    = false,
+  Hash $options            = {},
 ) {
-    validate_re( $name, '^[-_0-9a-zA-Z]+$', 'There is a very limited syntax permitted for target names (/[-_0-9a-zA-Z]+/)')
-    validate_string( $pagetitle )
-    validate_string( $menu )
-    validate_string( $hierarchy_parent )
-    validate_string( $probe )
-    validate_string( $host )
-    validate_array( $alerts )
-    validate_array( $slaves )
-    validate_bool( $nomasterpoll )
-    validate_string( $remark )
-    validate_hash( $options )
+
+    assert_type(Pattern[/^[-_0-9a-zA-Z]+$/], $name)
 
     $filename = "${smokeping::targets_dir}/${hierarchy_level}-${name}"
     concat { $filename:
