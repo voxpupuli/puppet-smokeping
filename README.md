@@ -33,7 +33,7 @@ Standalone Only (no master/slave support yet):
 
 ### Standalone SmokePing instance
 ```puppet
-# install a standalone instance on a server with default values (see init.pp for 
+# install a standalone instance on a server with default values (see init.pp for
 # parameter documentation
 class { '::smokeping':
     mode => 'standalone',
@@ -42,7 +42,7 @@ class { '::smokeping':
 
 ### Master SmokePing instance
 ```puppet
-# install a master instance on a server with default values (see init.pp for 
+# install a master instance on a server with default values (see init.pp for
 # parameter documentation. You must have a slave, or this will not work!
 class { '::smokeping':
     mode => 'master',
@@ -74,29 +74,29 @@ Class['::smokeping'] {
 
 ### Alerts
 ```puppet
-$alerts = [ 
-  { 
+$alerts = [
+  {
     name        => 'bigloss',
     alert_type  => 'loss',
     pattern     => '==0%,==0%,==0%,==0%,>0%,>0%,>0%',
     comment     => 'suddenly there is packet loss',
   },
 
-  { 
+  {
     name        => 'startloss',
     alert_type  => 'loss',
     pattern     => '==S,>0%,>0%,>0%',
     comment     => 'loss at startup',
   },
 
-  { 
+  {
     name        => 'noloss',
     alert_type  => 'loss',
     pattern     => '>0%,>0%,>0%,==0%,==0%,==0%,==0%',
     edgetrigger => true,
     comment     => 'there was loss and now its reachable again',
   },
-] 
+]
 Class['::smokeping'] {
   alerts => $alerts,
 }
