@@ -32,10 +32,10 @@
 define smokeping::target (
   String $pagetitle,
   String $menu,
-  String $hierarchy_parent,
+  String $hierarchy_parent = '',
   String $probe,
   String $host,
-  String $remark,
+  String $remark = '',
   Integer $hierarchy_level = 1,
   Array $alerts            = [],
   Array $slaves            = [],
