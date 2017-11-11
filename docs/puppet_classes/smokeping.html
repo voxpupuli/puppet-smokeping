@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Puppet Class: smokeping
+  
+    &mdash; Documentation by YARD 0.9.9
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "puppet_classes::smokeping";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../puppet_class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (s)</a> &raquo;
+    <span class='title'><span class='object_link'>Puppet Classes</span></span>
+     &raquo; 
+    <span class="title">smokeping</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="puppet_class_list_link"
+        href="../puppet_class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Puppet Class: smokeping</h1>
+<div class="box_info">
+  
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>
+      manifests/init.pp
+    </dd>
+  </dl>
+</div>
+
+<h2>Overview</h2>
+<div class="docstring">
+  <div class="discussion">
+    <p>== Class: smokeping</p>
+
+<p>A module to manage smokeping</p>
+
+<p>=== Parameters
+[<em>mode</em>]
+  SmokePing mode: master or slave or standalone (Default: master)</p>
+
+<p>[<em>master_url</em>]
+  URL to master cgi for slave mode (Default: <a href="http://somewhere/cgi-bin/smokeping.cgi">http://somewhere/cgi-bin/smokeping.cgi</a>)</p>
+
+<p>[<em>shared_secret</em>]
+  Path to slavesecrets file (Default: /etc/smokeping/slavesecrets.conf)</p>
+
+<p>[<em>slave_secrets</em>]
+  Path to smokeping_secrets file (Default: /etc/smokeping/smokeping_secrets)</p>
+
+<p>[<em>slave_name</em>]
+  Name of slave. Only used in slave mode (Default: slave1)</p>
+
+<p>[<em>slave_dir</em>]
+  Path to slave definitions on master (Default: /etc/smokeping/config.d/slaves.d)</p>
+
+<p>[<em>slave_location</em>]
+  Location of slave (Default: &#39;&#39;)</p>
+
+<p>[<em>slave_display_name</em>]
+  Name of slave, displayed on Webpage (Default: &#39;&#39;)</p>
+
+<p>[<em>slave_color</em>]
+  Color of slave in the graph (Default: &#39;&#39;)</p>
+
+<p>[<em>master_name</em>]
+  Name of the master, in case of more than one SmokePing Master/Slave (Default: default)</p>
+
+<p>[<em>owner</em>]
+  Owner of this SmokePing instance (Default: Peter Random)</p>
+
+<p>[<em>contact</em>]
+  Contact E-Mail of this SmokePing instance (Default: <a href="mailto:some@address.nowhere">some@address.nowhere</a>)</p>
+
+<p>[<em>mailhost</em>]
+  Where to send mails to (Default: my.mail.host)</p>
+
+<p>[<em>cgiurl</em>]
+  URL of SmokePing CGI (Default: <a href="http://some.url/smokeping.cgi">http://some.url/smokeping.cgi</a>)</p>
+
+<p>[<em>syslogfacility</em>]
+  Syslog Facility (Default: local0)</p>
+
+<p>[<em>probes</em>]
+  Probe definitions as Array of Hashes (Default: { name =&gt; &#39;FPing&#39;, binary =&gt; &#39;/usr/bin/fping&#39; })</p>
+
+<p>[<em>default_probe</em>]
+  Default Probe (Default: FPing)</p>
+
+<p>[<em>alerts_to</em>]
+  E-Mail address or tool to send Alerts to (Default: <a href="mailto:alertee@address.somewhere">alertee@address.somewhere</a>)</p>
+
+<p>[<em>alerts_from</em>]
+  Sender E-Mail of Alerts (Default: <a href="mailto:smokealert@company.xy">smokealert@company.xy</a>)</p>
+
+<p>[<em>alerts</em>]
+  Alert definitions as Array of Hashes (Default:
+  { name          =&gt; &#39;someloss&#39;,
+    alert_type    =&gt; &#39;loss&#39;,
+    pattern       =&gt; &#39;&gt;0%,<em>12</em>,&gt;0%,<em>12</em>,&gt;0%&#39;,
+    comment       =&gt; &#39;loss 3 times in a row&#39; } )</p>
+
+<p>[<em>cgi_remark_top</em>]
+  Remark on Website (Default: Welcome to the SmokePing website of xxx Company. Here you will learn all about the latency of our network.)</p>
+
+<p>[<em>cgi_title_top</em>]
+  Title on Website (Default: Network Latency Grapher)</p>
+
+<p>[<em>targets_dir</em>]
+  Where to save target definitions (Default: /etc/smokeping/config.d/targets.d)</p>
+
+<p>[<em>targets</em>]
+  Target definitions as a Hash of Smokeping::Target (Default: {})</p>
+
+<p>[<em>daemon_user</em>]
+  User to run SmokePing (Default: smokeping)</p>
+
+<p>[<em>daemon_group</em>]
+  Group of SmokePing (Default: smokeping)</p>
+
+<p>[<em>path_sendmail</em>]
+  Path to sendmail binary (Default: /usr/sbin/sendmail)</p>
+
+<p>[<em>webserver_user</em>]
+  User of webserver, owner of image-files  (Default: www-data)</p>
+
+<p>[<em>webserver_group</em>]
+  Group of webserver (Default: www-data)</p>
+
+<p>[<em>path_imgcache</em>]
+  Path to image cache dir (Default: /var/cache/smokeping/images)</p>
+
+<p>[<em>path_imgurl</em>]
+  URL path to images for CGI (Default: ../smokeping/images)</p>
+
+<p>[<em>path_datadir</em>]
+  Path to smokeping data (Default: /var/lib/smokeping)</p>
+
+<p>[<em>path_piddir</em>]
+  Path to PID file (Default: /var/run/smokeping)</p>
+
+<p>[<em>path_smokemail</em>]
+  Path to smokemail binary (Default: /etc/smokeping/smokemail)</p>
+
+<p>[<em>path_tmail</em>]
+  Path to tmail binary (Default: /etc/smokeping/tmail)</p>
+
+<p>[<em>version</em>]
+  Version which should be installed (Default: present)</p>
+
+<p>[<em>enable</em>]
+  Should the service be enabled during boot time? (Default: true)</p>
+
+<p>[<em>start</em>]
+  Should the service be started by Puppet? (Default: true)
+[<em>smanage_apache</em>]
+  Should we manage the Apache config with puppetlabs/apache? (Default: false)</p>
+
+<p>[<em>smanage_firewall</em>]
+  Should we manage a firewall rule for Smokeping with puppetlabs/firewall? (Default: false)</p>
+
+<p>[<em>smanage_selinux</em>]
+  Should we load an SELinux policy to allow Smokeping to work on Red Hat distros? (Default: false)</p>
+
+<p>=== Author</p>
+
+<p>Tobias Brunner <a href="mailto:tobias.brunner@nine.ch">tobias.brunner@nine.ch</a></p>
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;master&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>master_url</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;http://somewhere/cgi-bin/smokeping.cgi&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>shared_secret</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/etc/smokeping/slavesecrets.conf&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>slave_secrets</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/etc/smokeping/smokeping_secrets&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>slave_name</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;slave1&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>slave_dir</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/etc/smokeping/config.d/slaves.d&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>slave_location</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>slave_display_name</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>slave_color</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>webserver_user</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;www-data&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>webserver_group</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;www-data&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>master_name</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;default&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>owner</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;Peter Random&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>contact</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;root@localhost&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>mailhost</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;my.mail.host&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cgiurl</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;http://some.url/smokeping.cgi&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>syslogfacility</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;local0&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>syslogpriority</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;info&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>probes</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>[ { name =&gt; &#39;FPing&#39;, binary =&gt; &#39;/usr/bin/fping&#39;, step =&gt; &#39;300&#39; } ]</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_probe</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;FPing&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>alerts_to</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;root@localhost&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>alerts_from</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;root@localhost&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>alerts</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>[
+    {
+      name       =&gt; &#39;someloss&#39;,
+      alert_type =&gt; &#39;loss&#39;,
+      pattern    =&gt; &#39;&gt;0%,*12*,&gt;0%,*12*,&gt;0%&#39;,
+      comment    =&gt; &#39;loss 3 times in a row&#39;
+    },
+  ]</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cgi_remark_top</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;Welcome to the SmokePing website of xxx Company. Here you will learn all about the latency of our network.&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cgi_title_top</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;Network Latency Grapher&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>targets_dir</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/etc/smokeping/config.d/targets.d&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>targets</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>daemon_user</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;smokeping&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>daemon_group</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;smokeping&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path_sendmail</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/usr/sbin/sendmail&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path_imgcache</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/var/cache/smokeping/images&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path_imgurl</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;../smokeping/images&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path_datadir</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/var/lib/smokeping&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path_piddir</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/var/run/smokeping&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path_smokemail</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/etc/smokeping/smokemail&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path_tmail</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/etc/smokeping/tmail&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>version</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;present&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>enable</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>manage_apache</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>manage_firewall</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>manage_selinux</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>servername</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$::fqdn</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+
+</div><div class="method_details_list">
+  <table class="source_code">
+    <tr>
+      <td>
+        <pre class="lines">
+
+
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222</pre>
+      </td>
+      <td>
+        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 136</span>
+
+class smokeping(
+  $mode               = &#39;master&#39;,
+  $master_url         = &#39;http://somewhere/cgi-bin/smokeping.cgi&#39;,
+  $shared_secret      = &#39;/etc/smokeping/slavesecrets.conf&#39;,
+  $slave_secrets      = &#39;/etc/smokeping/smokeping_secrets&#39;,
+  $slave_name         = &#39;slave1&#39;,
+  $slave_dir          = &#39;/etc/smokeping/config.d/slaves.d&#39;,
+  $slave_location     = &#39;&#39;,
+  $slave_display_name = &#39;&#39;,
+  $slave_color        = &#39;&#39;,
+  $webserver_user     = &#39;www-data&#39;,
+  $webserver_group    = &#39;www-data&#39;,
+  $master_name        = &#39;default&#39;,
+  $owner              = &#39;Peter Random&#39;,
+  $contact            = &#39;root@localhost&#39;,
+  $mailhost           = &#39;my.mail.host&#39;,
+  $cgiurl             = &#39;http://some.url/smokeping.cgi&#39;,
+  $syslogfacility     = &#39;local0&#39;,
+  $syslogpriority     = &#39;info&#39;,
+  $probes             = [ { name =&gt; &#39;FPing&#39;, binary =&gt; &#39;/usr/bin/fping&#39;, step =&gt; &#39;300&#39; } ],
+  $default_probe      = &#39;FPing&#39;,
+  $alerts_to          = &#39;root@localhost&#39;,
+  $alerts_from        = &#39;root@localhost&#39;,
+  $alerts             = [
+    {
+      name       =&gt; &#39;someloss&#39;,
+      alert_type =&gt; &#39;loss&#39;,
+      pattern    =&gt; &#39;&gt;0%,*12*,&gt;0%,*12*,&gt;0%&#39;,
+      comment    =&gt; &#39;loss 3 times in a row&#39;
+    },
+  ],
+  $cgi_remark_top     = &#39;Welcome to the SmokePing website of xxx Company. Here you will learn all about the latency of our network.&#39;,
+  $cgi_title_top      = &#39;Network Latency Grapher&#39;,
+  $targets_dir        = &#39;/etc/smokeping/config.d/targets.d&#39;,
+  $targets            = {},
+  $daemon_user        = &#39;smokeping&#39;,
+  $daemon_group       = &#39;smokeping&#39;,
+  $path_sendmail      = &#39;/usr/sbin/sendmail&#39;,
+  $path_imgcache      = &#39;/var/cache/smokeping/images&#39;,
+  $path_imgurl        = &#39;../smokeping/images&#39;,
+  $path_datadir       = &#39;/var/lib/smokeping&#39;,
+  $path_piddir        = &#39;/var/run/smokeping&#39;,
+  $path_smokemail     = &#39;/etc/smokeping/smokemail&#39;,
+  $path_tmail         = &#39;/etc/smokeping/tmail&#39;,
+  $version            = &#39;present&#39;,
+  $enable             = true,
+  $start              = true,
+  $manage_apache      = false,
+  $manage_firewall    = false,
+  $manage_selinux     = false,
+  $servername         = $::fqdn,
+) {
+
+  if $manage_apache {
+    include ::smokeping::apache
+  }
+
+  if $manage_firewall {
+    firewall { &#39;100-smokeping-http&#39;:
+      proto  =&gt; &#39;tcp&#39;,
+      dport  =&gt; &#39;80&#39;,
+      action =&gt; &#39;accept&#39;,
+    }
+    firewall { &#39;100-smokeping-https&#39;:
+      proto  =&gt; &#39;tcp&#39;,
+      dport  =&gt; &#39;443&#39;,
+      action =&gt; &#39;accept&#39;,
+    }
+  }
+
+  if $manage_selinux {
+    if $::osfamily == &#39;RedHat&#39; {
+      selinux::module { &#39;local_smokeping&#39;:
+        ensure =&gt; &#39;present&#39;,
+        source =&gt; &#39;puppet:///modules/smokeping/local_smokeping.te&#39;,
+      }
+    }
+  }
+
+  contain ::smokeping::install
+  contain ::smokeping::config
+  contain ::smokeping::service
+
+  Class[&#39;smokeping::install&#39;]
+  -&gt; Class[&#39;smokeping::config&#39;]
+  ~&gt; Class[&#39;smokeping::service&#39;]
+}</pre>
+      </td>
+    </tr>
+  </table>
+</div>
+</div>
+
+      <div id="footer">
+     Generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>.
+</div>
+
+    </div>
+  </body>
+</html>
