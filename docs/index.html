@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.9
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="puppet_class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="puppet_class_list_link"
+        href="puppet_class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'><h1>SmokePing Puppet module</h1>
+
+<p>Puppet module to completely manage a SmokePing installation.
+Includes managing of Master/Slave installation and the menu hierarchy.</p>
+
+<p>Some background information can be found here: <a href="http://tobrunet.ch/2013/02/puppet-module-to-manage-smokeping/">Puppet module to manage SmokePing</a></p>
+
+<h2>Features</h2>
+
+<ul>
+<li>Master/Slave/Standalone SmokePing configuration possible</li>
+<li>Menu hierarchy implemented</li>
+<li>Define Probes and Alert patterns</li>
+<li>Config files managed with templates</li>
+<li>Uses exported resources to configure Slaves on the Master (tag: smokeping-slave)</li>
+<li>Automatically generates a shared secret for Master/Slave configuration (tag: smokeping-slave-secret)</li>
+</ul>
+
+<h2>Supported Platforms</h2>
+
+<p>Fully supported:</p>
+
+<ul>
+<li>Ubuntu (Tested on 12.04, 14.04)</li>
+</ul>
+
+<p>Standalone Only (no master/slave support yet):</p>
+
+<ul>
+<li>Fedora 22+</li>
+<li>CentOS 7+ (Note: requires third party repository to provide smokeping package).</li>
+</ul>
+
+<h2>Dependencies</h2>
+
+<ul>
+<li><a href="https://github.com/puppetlabs/puppet-concat">puppetlabs-concat</a></li>
+<li><a href="https://github.com/puppetlabs/puppet-stdlib">puppetlabs-stdlib</a></li>
+</ul>
+
+<h2>Example</h2>
+
+<h3>Standalone SmokePing instance</h3>
+
+<pre class="code puppet"><code class="puppet"># install a standalone instance on a server with default values (see init.pp for
+# parameter documentation
+class { &#39;::smokeping&#39;:
+    mode =&gt; &#39;standalone&#39;,
+}
+</code></pre>
+
+<h3>Master SmokePing instance</h3>
+
+<pre class="code puppet"><code class="puppet"># install a master instance on a server with default values (see init.pp for
+# parameter documentation. You must have a slave, or this will not work!
+class { &#39;::smokeping&#39;:
+    mode =&gt; &#39;master&#39;,
+}
+</code></pre>
+
+<h3>Slave SmokePing instance</h3>
+
+<pre class="code puppet"><code class="puppet">class { &#39;::smokeping&#39;:
+    mode           =&gt; &#39;slave&#39;,
+    slave_name     =&gt; $::hostname,
+    master_url     =&gt; &#39;http://myserver.tld/smokeping/smokeping.cgi&#39;,
+    slave_location =&gt; &#39;zurich&#39;,
+}
+</code></pre>
+
+<p>This configures the server as slaves and adds the slave definition automatically to the
+master using exported resources.</p>
+
+<h3>Probes</h3>
+
+<pre class="code puppet"><code class="puppet">$probes = [
+    { name =&gt; &#39;FPing&#39;, binary =&gt; &#39;/usr/bin/fping&#39; },
+    { name =&gt; &#39;FPing6&#39;, binary =&gt; &#39;/usr/bin/fping6&#39; },
+]
+Class[&#39;::smokeping&#39;] {
+  probes =&gt; $probes
+}
+</code></pre>
+
+<h3>Alerts</h3>
+
+<pre class="code puppet"><code class="puppet">$alerts = [
+  {
+    name        =&gt; &#39;bigloss&#39;,
+    alert_type  =&gt; &#39;loss&#39;,
+    pattern     =&gt; &#39;==0%,==0%,==0%,==0%,&gt;0%,&gt;0%,&gt;0%&#39;,
+    comment     =&gt; &#39;suddenly there is packet loss&#39;,
+  },
+
+  {
+    name        =&gt; &#39;startloss&#39;,
+    alert_type  =&gt; &#39;loss&#39;,
+    pattern     =&gt; &#39;==S,&gt;0%,&gt;0%,&gt;0%&#39;,
+    comment     =&gt; &#39;loss at startup&#39;,
+  },
+
+  {
+    name        =&gt; &#39;noloss&#39;,
+    alert_type  =&gt; &#39;loss&#39;,
+    pattern     =&gt; &#39;&gt;0%,&gt;0%,&gt;0%,==0%,==0%,==0%,==0%&#39;,
+    edgetrigger =&gt; true,
+    comment     =&gt; &#39;there was loss and now its reachable again&#39;,
+  },
+]
+Class[&#39;::smokeping&#39;] {
+  alerts =&gt; $alerts,
+}
+</code></pre>
+
+<h3>Targets</h3>
+
+<pre class="code puppet"><code class="puppet"># Top Level
+smokeping::target { &#39;World&#39;:
+    menu      =&gt; &#39;World&#39;,
+    pagetitle =&gt; &#39;Connection to the World&#39;,
+    alerts    =&gt; [ &#39;bigloss&#39;, &#39;noloss&#39; ],
+}
+
+smokeping::target { &#39;GoogleCH&#39;:
+    hierarchy_parent =&gt; &#39;World&#39;,
+    hierarchy_level  =&gt; 2,
+    menu             =&gt; &#39;google.ch&#39;,
+    pagetitle        =&gt; &#39;Google&#39;,
+}
+smokeping::target { &#39;GoogleCHIPv4&#39;:
+    hierarchy_parent =&gt; &#39;GoogleCH&#39;,
+    hierarchy_level  =&gt; 3,
+    menu             =&gt; &#39;google.ch IPv4&#39;,
+    host             =&gt; &#39;google.ch&#39;,
+    slaves           =&gt; [&#39;slave1&#39;],
+}
+smokeping::target { &#39;GoogleCHIPv6&#39;:
+    hierarchy_parent =&gt; &#39;GoogleCH&#39;,
+    hierarchy_level  =&gt; 3,
+    menu             =&gt; &#39;google.ch IPv6&#39;,
+    host             =&gt; &#39;google.ch&#39;,
+    probe            =&gt; &#39;FPing6&#39;,
+    slaves           =&gt; [&#39;slave1&#39;],
+}
+smokeping::target { &#39;GoogleCHCurl&#39;:
+    hierarchy_parent =&gt; &#39;GoogleCH&#39;,
+    hierarchy_level  =&gt; 3,
+    menu             =&gt; &#39;google.ch Curl&#39;,
+    host             =&gt; &#39;google.ch&#39;,
+    probe            =&gt; &#39;Curl&#39;,
+    options          =&gt; {
+      urlformat =&gt; &#39;http://%host%/&#39;,
+    }
+}
+</code></pre>
+
+<h2>License / Author</h2>
+
+<p>The module is written by</p>
+
+<ul>
+<li>Tobias Brunner <a href="mailto:tobias@tobru.ch">tobias@tobru.ch</a></li>
+</ul>
+
+<p>Licensed under Apache License, Version 2.0, Copyright 2015 by Tobias Brunner</p>
+
+<h2>Contibutors</h2>
+
+<p>See: <a href="https://github.com/tobru/puppet-smokeping/graphs/contributors">Github Contributors</a></p>
+</div></div>
+
+      <div id="footer">
+     Generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>.
+</div>
+
+    </div>
+  </body>
+</html>
