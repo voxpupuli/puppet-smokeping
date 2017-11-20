@@ -27,7 +27,6 @@ class smokeping::params {
     $cgi_remark_top     = 'Welcome to the SmokePing website of xxx Company. Here you will learn all about the latency of our network.'
     $cgi_title_top      = 'Network Latency Grapher'
 
-    $probes             = [ { name => 'FPing', binary => '/usr/bin/fping', step => '300' } ]
     $default_probe      = 'FPing'
     $alerts_to          = 'root@localhost'
     $alerts_from        = 'root@localhost'
@@ -41,8 +40,13 @@ class smokeping::params {
 
     # /etc/smokeping appears to be generally consistent cross-platform
     $targets_dir        = '/etc/smokeping/config.d/targets.d'
+    $targets            = {}
     $path_smokemail     = '/etc/smokeping/smokemail'
     $path_tmail         = '/etc/smokeping/tmail'
+    $manage_apache      = false
+    $manage_firewall    = false
+    $manage_selinux     = false
+    $servername         = $::fqdn
 
     # The major cross-platform differences consist of user account variations
     # and where files reside on disk:
@@ -55,6 +59,7 @@ class smokeping::params {
       $path_imgurl        = '../smokeping/images'
       $path_datadir       = '/var/lib/smokeping'
       $path_piddir        = '/var/run/smokeping'
+      $probes             = [ { name => 'FPing', binary => '/usr/bin/fping', step => '300' } ]
 
       $cgiurl             = 'http://some.url/smokeping.cgi'
       $webserver_user     = 'www-data'
@@ -78,6 +83,7 @@ class smokeping::params {
       $path_sendmail      = '/usr/sbin/sendmail'
       $path_imgcache      = '/var/lib/smokeping/images'
       $path_imgurl        = '/smokeping/images'
+      $probes             = [ { name => 'FPing', binary => '/usr/sbin/fping', step => '300' } ]
       $path_datadir       = '/var/lib/smokeping/rrd'
       $path_piddir        = '/var/run/smokeping'
 
