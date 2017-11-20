@@ -1,5 +1,4 @@
 class smokeping::install {
-  include ::smokeping::params
 
   package { 'smokeping':
     ensure => $smokeping::version,
@@ -8,8 +7,8 @@ class smokeping::install {
   if ! defined (Package['fping']) {
     ensure_packages(['fping'])
   }
-  if ! defined (Package[$smokeping::params::package_perldoc]) {
-    ensure_packages([$smokeping::params::package_perldoc])
+  if ! defined (Package[$smokeping::package_perldoc]) {
+    ensure_packages([$smokeping::package_perldoc])
   }
 
   # correct permissions
