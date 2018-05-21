@@ -30,7 +30,7 @@ define smokeping::slave(
       mode    => '0600',
       owner   => $smokeping::daemon_user,
       group   => $smokeping::daemon_group,
-      content => $random_value,
+      content => "${random_value}",
   }
   @@concat::fragment { "${::fqdn}-secret":
       target  => $smokeping::slave_secrets,
