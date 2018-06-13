@@ -13,6 +13,7 @@
 #   Name of the smokeping master, in case there are more than one. (Default: default)
 #
 define smokeping::slave(
+    $slave_name,
     $location,
     $display_name,
     $color,
@@ -25,21 +26,21 @@ define smokeping::slave(
     mode    => '0644',
   }
 
-  $random_value = fqdn_rand(1000000)
+  $random_value = fqdn_rand_string(60, 'abcdefghjkelmnopqrstuvwxyaABCDEFGHJKELMNOPQRSTUVWXYA0123456789')
   file { $smokeping::shared_secret:
       mode    => '0600',
       owner   => $smokeping::daemon_user,
       group   => $smokeping::daemon_group,
       content => "${random_value}",
   }
-  @@concat::fragment { "${::fqdn}-secret":
+  @@concat::fragment { "${slave_name}-secret":
       target  => $smokeping::slave_secrets,
       order   => 10,
-      content => "${::fqdn}:${random_value}\n",
+      content => "${slave_name}:${random_value}\n",
       tag     => "smokeping-slave-secret-${master}",
   }
 
-  $filename = "${smokeping::slave_dir}/${::fqdn}"
+  $filename = "${smokeping::slave_dir}/${slave_name}"
   @@file { $filename:
       content => template('smokeping/slave.erb'),
       tag     => "smokeping-slave-${master}",
