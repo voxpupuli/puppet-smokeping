@@ -25,12 +25,12 @@ define smokeping::slave(
     mode    => '0644',
   }
 
-  $random_value = fqdn_rand(1000000)
+  $random_value = fqdn_rand_string(60, 'abcdefghjkelmnopqrstuvwxyaABCDEFGHJKELMNOPQRSTUVWXYA0123456789')
   file { $smokeping::shared_secret:
       mode    => '0600',
       owner   => $smokeping::daemon_user,
       group   => $smokeping::daemon_group,
-      content => "${random_value}",
+      content => $random_value,
   }
   @@concat::fragment { "${::fqdn}-secret":
       target  => $smokeping::slave_secrets,
