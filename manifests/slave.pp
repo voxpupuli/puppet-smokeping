@@ -25,7 +25,7 @@ define smokeping::slave(
     mode    => '0644',
   }
 
-  $random_value = fqdn_rand(1000000)
+  $random_value = fqdn_rand_string(60, 'abcdefghjkelmnopqrstuvwxyaABCDEFGHJKELMNOPQRSTUVWXYA0123456789')
   file { $smokeping::shared_secret:
       mode    => '0600',
       owner   => $smokeping::daemon_user,
