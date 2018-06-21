@@ -3,8 +3,11 @@
 # [*slave*]
 #   Location of slave
 #
+# [*slave_name*]
+#   Name of the slave for config files
+#
 # [*display_name*]
-#   Name of the slave
+#  The name of the slave server that will be displayed in the web interface
 #
 # [*color*]
 #   Color of this slave
