@@ -16,7 +16,7 @@
 #   Name of the smokeping master, in case there are more than one. (Default: default)
 #
 define smokeping::slave(
-    $slave_name = $::smokeping::params::slave_name,
+    $slave_name,
     $location,
     $display_name,
     $color,
