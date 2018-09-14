@@ -30,12 +30,12 @@
 #   Remark displayed on Website
 #
 define smokeping::target (
-  String $pagetitle,
-  String $menu,
-  String $hierarchy_parent,
-  String $probe,
-  String $host,
-  String $remark,
+  Optional[String[1]] $pagetitle        = undef,
+  Optional[String[1]] $menu             = undef,
+  Optional[String[1]] $hierarchy_parent = undef,
+  Optional[String[1]] $probe            = undef,
+  Optional[String[1]] $host             = undef,
+  Optional[String[1]] $remark           = undef,
   Integer $hierarchy_level = 1,
   Array $alerts            = [],
   Array $slaves            = [],
@@ -68,7 +68,7 @@ define smokeping::target (
         }
         } else {
             #all other levels
-            if $hierarchy_parent == '' {
+            unless $hierarchy_parent {
                 fail('hierarchy_parent has to be specified for levels > 1')
             }
             $parent_level = $hierarchy_level - 1
