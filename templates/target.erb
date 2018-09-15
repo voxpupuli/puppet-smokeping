@@ -1,33 +1,31 @@
 <%= '+' * @hierarchy_level.to_i %> <%= @name %>
-<% if @probe != '' then -%>
+<% if @probe then -%>
 probe = <%= @probe %>
 <% end -%>
 
 menu = <%= @menu %>
-<% if @pagetitle != '' then -%>
+<% if @pagetitle then -%>
 title = <%= @pagetitle %>
 <% else -%>
 title = <%= @menu %>
 <% end -%>
-<% if @host != '' then -%>
+<% if @host then -%>
 host = <%= @host %>
 <% end -%>
-<% if ! @alerts.empty? then -%>
+<% unless @alerts.empty? then -%>
 alerts = <%= @alerts.join(',') %>
 <% end -%>
 <% if @nomasterpoll then -%>
 nomasterpoll = yes
 <% end -%>
-<% if @slaves != [] then -%>
+<% unless @slaves.empty? then -%>
 slaves = <%= @slaves.join(' ') %>
 <% end -%>
-<% if @remark != '' then -%>
+<% if @remark then -%>
 remark = <%= @remark %>
 <% end -%>
-<% if @options then -%>
 <%- @options.sort.each do |key,value| -%>
 <%= key %> = <%= value %>
 <%- end -%>
-<% end -%>
 
 
