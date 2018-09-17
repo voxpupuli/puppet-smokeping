@@ -8,7 +8,6 @@ class smokeping::params {
     $enable             = true
     $start              = true
 
-    $mode               = 'master'
     $master_url         = 'http://somewhere/cgi-bin/smokeping.cgi'
     $shared_secret      = '/etc/smokeping/slavesecrets.conf'
     $slave_secrets      = '/etc/smokeping/smokeping_secrets'
@@ -50,8 +49,9 @@ class smokeping::params {
 
     # The major cross-platform differences consist of user account variations
     # and where files reside on disk:
-    if $::osfamily == 'Debian' or $::operatingsystem == 'Ubuntu' {
+    if $::osfamily == 'Debian' {
 
+      $mode               = 'master'
       $daemon_user        = 'smokeping'
       $daemon_group       = 'smokeping'
       $path_sendmail      = '/usr/sbin/sendmail'
@@ -77,6 +77,7 @@ class smokeping::params {
       # Note that many thirdparty Smokeping RPMs for EL tend to be rebuilds of
       # the Fedora one, so best to fix in Fedora first, then tackle the other
       # third party repositories.
+      $mode               = 'standalone'
       $daemon_user        = 'root'
       $daemon_group       = 'root'
 

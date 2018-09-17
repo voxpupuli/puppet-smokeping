@@ -4,7 +4,7 @@
 #
 # === Parameters
 # [*mode*]
-#   SmokePing mode: master or slave or standalone (Default: master)
+#   SmokePing mode: master or slave or standalone (Default: master on ubuntu, standalone on redhat)
 #
 # [*master_url*]
 #   URL to master cgi for slave mode (Default: http://somewhere/cgi-bin/smokeping.cgi)
@@ -120,13 +120,14 @@
 #
 # [*start*]
 #   Should the service be started by Puppet? (Default: true)
-# [*smanage_apache*]
+#
+# [*manage_apache*]
 #   Should we manage the Apache config with puppetlabs/apache? (Default: false)
 #
-# [*smanage_firewall*]
+# [*manage_firewall*]
 #   Should we manage a firewall rule for Smokeping with puppetlabs/firewall? (Default: false)
 #
-# [*smanage_selinux*]
+# [*manage_selinux*]
 #   Should we load an SELinux policy to allow Smokeping to work on Red Hat distros? (Default: false)
 #
 # === Author
