@@ -182,7 +182,7 @@ class smokeping(
 )  inherits ::smokeping::params {
 
   if $manage_apache {
-    include ::smokeping::apache
+    include smokeping::apache
   }
 
   if $manage_firewall {
@@ -207,9 +207,9 @@ class smokeping(
     }
   }
 
-  contain ::smokeping::install
-  contain ::smokeping::config
-  contain ::smokeping::service
+  contain smokeping::install
+  contain smokeping::config
+  contain smokeping::service
 
   Class['smokeping::install']
   -> Class['smokeping::config']

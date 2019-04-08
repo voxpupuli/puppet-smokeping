@@ -70,8 +70,8 @@ class smokeping::apache {
   }
 
   # Configure apache
-  include ::apache
-  include ::apache::mod::perl
+  include apache
+  include apache::mod::perl
   apache::vhost { 'smokeping':
     servername     => $servername,
     docroot        => $docroot,
