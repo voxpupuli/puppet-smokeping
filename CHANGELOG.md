@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v5.0.0](https://github.com/voxpupuli/puppet-smokeping/tree/v5.0.0) (2019-05-07)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-smokeping/compare/v4.0.0...v5.0.0)
+
+**Breaking changes:**
+
+- modulesync 2.7.0 and drop puppet 4 [\#106](https://github.com/voxpupuli/puppet-smokeping/pull/106) ([bastelfreak](https://github.com/bastelfreak))
+
+**Merged pull requests:**
+
+- Allow puppetlabs/apache 4.x [\#107](https://github.com/voxpupuli/puppet-smokeping/pull/107) ([dhoppe](https://github.com/dhoppe))
+- modulesync 2.2.0 and allow puppet 6.x [\#103](https://github.com/voxpupuli/puppet-smokeping/pull/103) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v4.0.0](https://github.com/voxpupuli/puppet-smokeping/tree/v4.0.0) (2018-09-17)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-smokeping/compare/v3.1.1...v4.0.0)
