@@ -1,6 +1,6 @@
 # Manage Apache config
 class smokeping::apache {
-  $servername = $::smokeping::servername
+  $servername = $smokeping::servername
 
   $docroot = $::osfamily ? {
     'RedHat' => '/usr/share/smokeping/htdocs',
