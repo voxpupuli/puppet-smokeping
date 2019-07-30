@@ -50,7 +50,7 @@ define smokeping::target (
         owner   => root,
         group   => root,
         mode    => '0644',
-        require => File[$::smokeping::targets_dir],
+        require => File[$smokeping::targets_dir],
         notify  => Class['smokeping::service'],
     }
     concat::fragment { "target-definition-${hierarchy_level}-${name}":
