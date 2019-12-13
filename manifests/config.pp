@@ -74,7 +74,7 @@ class smokeping::config {
   }
 
   ## Platform Specific
-  if $::osfamily == 'Debian' or $::operatingsystem == 'Ubuntu' {
+  if $facts['os']['family'] == 'Debian' or $facts['os']['name'] == 'Ubuntu' {
     # Defaults file allows smokeping to be launched in different modes (eg slave vs master)
     file { '/etc/default/smokeping':
       content => template('smokeping/defaults.erb');
@@ -100,7 +100,7 @@ class smokeping::config {
       # Check if slave_display_name is unset.
       # --> use FQDN if not set.
       if $smokeping::slave_display_name == '' {
-        $display_name = $::fqdn
+        $display_name = $facts['networking']['fqdn']
       } else {
         $display_name = $smokeping::slave_display_name
       }
@@ -111,7 +111,7 @@ class smokeping::config {
         $slave_color = $smokeping::slave_color
       }
 
-      smokeping::slave { $::fqdn:
+      smokeping::slave { $facts['networking']['fqdn']:
         location     => $smokeping::slave_location,
         display_name => $display_name,
         color        => $slave_color,

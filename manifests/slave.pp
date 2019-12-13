@@ -32,14 +32,14 @@ define smokeping::slave(
       group   => $smokeping::daemon_group,
       content => $random_value,
   }
-  @@concat::fragment { "${::fqdn}-secret":
+  @@concat::fragment { "${facts['networking']['fqdn']}-secret":
       target  => $smokeping::slave_secrets,
       order   => 10,
-      content => "${::fqdn}:${random_value}\n",
+      content => "${facts['networking']['fqdn']}:${random_value}\n",
       tag     => "smokeping-slave-secret-${master}",
   }
 
-  $filename = "${smokeping::slave_dir}/${::fqdn}"
+  $filename = "${smokeping::slave_dir}/${facts['networking']['fqdn']}"
   @@file { $filename:
       content => template('smokeping/slave.erb'),
       tag     => "smokeping-slave-${master}",
