@@ -45,11 +45,11 @@ class smokeping::params {
     $manage_apache      = false
     $manage_firewall    = false
     $manage_selinux     = false
-    $servername         = $::fqdn
+    $servername         = $facts['networking']['fqdn']
 
     # The major cross-platform differences consist of user account variations
     # and where files reside on disk:
-    if $::osfamily == 'Debian' {
+    if $facts['os']['family'] == 'Debian' {
 
       $mode               = 'master'
       $daemon_user        = 'smokeping'
@@ -67,7 +67,7 @@ class smokeping::params {
 
       $package_perldoc    = 'perl-doc'
 
-    } elsif $::osfamily == 'RedHat' or $::operatingsystem == 'amazon' {
+    } elsif $facts['os']['family'] == 'RedHat' or $facts['os']['name'] == 'amazon' {
 
       # The Fedora RPM seems to run in foreground mode as root. This probably
       # isn't the best decision, but we shouldn't try and adjust how the OS

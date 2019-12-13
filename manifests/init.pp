@@ -199,7 +199,7 @@ class smokeping(
   }
 
   if $manage_selinux {
-    if $::osfamily == 'RedHat' {
+    if $facts['os']['family'] == 'RedHat' {
       selinux::module { 'local_smokeping':
         ensure    => 'present',
         source_te => 'puppet:///modules/smokeping/local_smokeping.te',

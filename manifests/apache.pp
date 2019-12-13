@@ -2,13 +2,13 @@
 class smokeping::apache {
   $servername = $smokeping::servername
 
-  $docroot = $::osfamily ? {
+  $docroot = $facts['os']['family'] ? {
     'RedHat' => '/usr/share/smokeping/htdocs',
     'Debian' => '/usr/share/smokeping/www',
   }
 
   # Construct hash of parameters
-  $aliases = $::osfamily ? {
+  $aliases = $facts['os']['family'] ? {
     'RedHat' => [
       {
         'alias' => '/smokeping/images',
@@ -48,7 +48,7 @@ class smokeping::apache {
   }
 
 
-  $directories = $::osfamily ? {
+  $directories = $facts['os']['family'] ? {
     'RedHat' => [
       {
         'path'     => '/usr/share/smokeping/htdocs',
