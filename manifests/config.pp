@@ -1,5 +1,4 @@
 class smokeping::config {
-
   $mode          = $smokeping::mode
   $master_url    = $smokeping::master_url
   $shared_secret = $smokeping::shared_secret
@@ -128,7 +127,6 @@ class smokeping::config {
     ## collect slaves if mode is master and create Targets
     ## if mode is standalone, just create targets...
     /^(master|standalone)$/: {
-
       if $mode =~ /^master$/ {
         # collect slaves
         File <<| tag == "smokeping-slave-${master_name}" |>>
@@ -183,5 +181,4 @@ class smokeping::config {
     }
     default: { fail("mode ${mode} unknown") }
   }
-
 }

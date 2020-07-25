@@ -1,5 +1,4 @@
 class smokeping::service {
-
   $ensure = $smokeping::start ? {
     true    => running,
     false   => stopped,
@@ -10,5 +9,4 @@ class smokeping::service {
     ensure => $ensure,
     enable => $smokeping::enable,
   }
-
 }
