@@ -1,5 +1,4 @@
 class smokeping::install {
-
   package { 'smokeping':
     ensure => $smokeping::version,
   }
@@ -33,5 +32,4 @@ class smokeping::install {
     require => Package['smokeping'],
     recurse => true,
   }
-
 }

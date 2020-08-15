@@ -134,7 +134,7 @@
 #
 # Tobias Brunner <tobias.brunner@nine.ch>
 #
-class smokeping(
+class smokeping (
   $mode               = $smokeping::params::mode,
   $master_url         = $smokeping::params::master_url,
   $shared_secret      = $smokeping::params::shared_secret,
@@ -180,7 +180,6 @@ class smokeping(
   $manage_selinux     = $smokeping::params::manage_selinux,
   $servername         = $smokeping::params::servername,
 )  inherits ::smokeping::params {
-
   if $manage_apache {
     include smokeping::apache
   }

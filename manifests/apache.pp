@@ -47,7 +47,6 @@ class smokeping::apache {
     ],
   }
 
-
   $directories = $facts['os']['family'] ? {
     'RedHat' => [
       {
