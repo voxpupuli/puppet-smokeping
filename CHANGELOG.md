@@ -4,6 +4,30 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v5.1.0](https://github.com/voxpupuli/puppet-smokeping/tree/v5.1.0) (2020-09-24)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-smokeping/compare/v5.0.0...v5.1.0)
+
+**Implemented enhancements:**
+
+- add support for Puppet 5 [\#82](https://github.com/voxpupuli/puppet-smokeping/issues/82)
+
+**Fixed bugs:**
+
+- Allow puppetlabs/concat 6.x, puppetlabs/stdlib 6.x [\#110](https://github.com/voxpupuli/puppet-smokeping/pull/110) ([dhoppe](https://github.com/dhoppe))
+- Fix selinux::module parameter [\#109](https://github.com/voxpupuli/puppet-smokeping/pull/109) ([sapakt](https://github.com/sapakt))
+
+**Closed issues:**
+
+- Support latest puppetlabs-apache [\#125](https://github.com/voxpupuli/puppet-smokeping/issues/125)
+
+**Merged pull requests:**
+
+- Support puppetlabs-apache 5.x [\#126](https://github.com/voxpupuli/puppet-smokeping/pull/126) ([andybotting](https://github.com/andybotting))
+- modulesync 3.0.0 & puppet-lint updates [\#118](https://github.com/voxpupuli/puppet-smokeping/pull/118) ([bastelfreak](https://github.com/bastelfreak))
+- update repo links to https [\#116](https://github.com/voxpupuli/puppet-smokeping/pull/116) ([bastelfreak](https://github.com/bastelfreak))
+- Allow puppet-selinux 2.x and 3.x [\#111](https://github.com/voxpupuli/puppet-smokeping/pull/111) ([ekohl](https://github.com/ekohl))
+
 ## [v5.0.0](https://github.com/voxpupuli/puppet-smokeping/tree/v5.0.0) (2019-05-07)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-smokeping/compare/v4.0.0...v5.0.0)
