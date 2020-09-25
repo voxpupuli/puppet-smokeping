@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v5.1.1](https://github.com/voxpupuli/puppet-smokeping/tree/v5.1.1) (2020-09-25)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-smokeping/compare/v5.1.0...v5.1.1)
+
+**Closed issues:**
+
+- Support latest puppetlabs-firewall [\#128](https://github.com/voxpupuli/puppet-smokeping/issues/128)
+
+**Merged pull requests:**
+
+- Update dependencies to support latest puppetlabs-firewall [\#129](https://github.com/voxpupuli/puppet-smokeping/pull/129) ([andybotting](https://github.com/andybotting))
+
 ## [v5.1.0](https://github.com/voxpupuli/puppet-smokeping/tree/v5.1.0) (2020-09-24)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-smokeping/compare/v5.0.0...v5.1.0)
