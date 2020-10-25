@@ -179,7 +179,7 @@ class smokeping (
   $manage_firewall    = $smokeping::params::manage_firewall,
   $manage_selinux     = $smokeping::params::manage_selinux,
   $servername         = $smokeping::params::servername,
-)  inherits ::smokeping::params {
+)  inherits smokeping::params {
   if $manage_apache {
     include smokeping::apache
   }
