@@ -1,0 +1,15 @@
+---
+smokeping::mode: standalone
+smokeping::daemon_user: root
+smokeping::daemon_group: root
+smokeping::path_imgcache: /var/lib/smokeping/images
+smokeping::path_imgurl: /smokeping/images
+smokeping::path_datadir: /var/lib/smokeping/rrd
+smokeping::probes:
+  - name: FPing
+    binary: /usr/sbin/fping
+    step: 300
+smokeping::webserver_user: apache
+smokeping::webserver_group: apache
+smokeping::package_perldoc: perl-Pod-Perldoc
+smokeping::cgiurl: http://localhost/smokeping/sm.cgi

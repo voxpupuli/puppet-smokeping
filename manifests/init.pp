@@ -1,185 +1,181 @@
-# == Class: smokeping
+# @summary Manage SmokePing
 #
-# A module to manage smokeping
+# @param mode
+#   SmokePing mode: master, slave, or standalone
 #
-# === Parameters
-# [*mode*]
-#   SmokePing mode: master or slave or standalone (Default: master on ubuntu, standalone on redhat)
+# @param master_url
+#   URL to master cgi for slave mode
 #
-# [*master_url*]
-#   URL to master cgi for slave mode (Default: http://somewhere/cgi-bin/smokeping.cgi)
+# @param shared_secret
+#   Path to slavesecrets file
 #
-# [*shared_secret*]
-#   Path to slavesecrets file (Default: /etc/smokeping/slavesecrets.conf)
+# @param slave_secrets
+#   Path to smokeping_secrets file
 #
-# [*slave_secrets*]
-#   Path to smokeping_secrets file (Default: /etc/smokeping/smokeping_secrets)
+# @param slave_name
+#   Name of slave. Only used in slave mode
 #
-# [*slave_name*]
-#   Name of slave. Only used in slave mode (Default: slave1)
+# @param slave_dir
+#   Path to slave definitions on master
 #
-# [*slave_dir*]
-#   Path to slave definitions on master (Default: /etc/smokeping/config.d/slaves.d)
+# @param slave_location
+#   Location of slave
 #
-# [*slave_location*]
-#   Location of slave (Default: '')
+# @param slave_display_name
+#   Name of slave, displayed on Webpage
 #
-# [*slave_display_name*]
-#   Name of slave, displayed on Webpage (Default: '')
+# @param slave_color
+#   Color of slave in the graph
 #
-# [*slave_color*]
-#   Color of slave in the graph (Default: '')
+# @param master_name
+#   Name of the master, in case of more than one SmokePing Master/Slave
 #
-# [*master_name*]
-#   Name of the master, in case of more than one SmokePing Master/Slave (Default: default)
+# @param owner
+#   Owner of this SmokePing instance
 #
-# [*owner*]
-#   Owner of this SmokePing instance (Default: Peter Random)
+# @param contact
+#   Contact E-Mail of this SmokePing instance
 #
-# [*contact*]
-#   Contact E-Mail of this SmokePing instance (Default: some@address.nowhere)
+# @param mailhost
+#   Where to send mails to
 #
-# [*mailhost*]
-#   Where to send mails to (Default: my.mail.host)
+# @param cgiurl
+#   URL of SmokePing CGI
 #
-# [*cgiurl*]
-#   URL of SmokePing CGI (Default: http://some.url/smokeping.cgi)
+# @param syslogfacility
+#   Syslog Facility
 #
-# [*syslogfacility*]
-#   Syslog Facility (Default: local0)
+# @param probes
+#   Probe definitions as Array of Hashes
 #
-# [*probes*]
-#   Probe definitions as Array of Hashes (Default: { name => 'FPing', binary => '/usr/bin/fping' })
+# @param default_probe
+#   Default Probe
 #
-# [*default_probe*]
-#   Default Probe (Default: FPing)
+# @param alerts_to
+#   E-Mail address or tool to send Alerts to
 #
-# [*alerts_to*]
-#   E-Mail address or tool to send Alerts to (Default: alertee@address.somewhere)
+# @param alerts_from
+#   Sender E-Mail of Alerts
 #
-# [*alerts_from*]
-#   Sender E-Mail of Alerts (Default: smokealert@company.xy)
+# @param alerts
+#   Alert definitions as Array of Hashes
 #
-# [*alerts*]
-#   Alert definitions as Array of Hashes (Default:
-#   { name          => 'someloss',
-#     alert_type    => 'loss',
-#     pattern       => '>0%,*12*,>0%,*12*,>0%',
-#     comment       => 'loss 3 times in a row' } )
+# @param cgi_remark_top
+#   Remark on Website
 #
-# [*cgi_remark_top*]
-#   Remark on Website (Default: Welcome to the SmokePing website of xxx Company. Here you will learn all about the latency of our network.)
+# @param cgi_title_top
+#   Title on Website
 #
-# [*cgi_title_top*]
-#   Title on Website (Default: Network Latency Grapher)
+# @param targets_dir
+#   Where to save target definitions
 #
-# [*targets_dir*]
-#   Where to save target definitions (Default: /etc/smokeping/config.d/targets.d)
+# @param targets
+#   Target definitions as a Hash of Smokeping::Target
 #
-# [*targets*]
-#   Target definitions as a Hash of Smokeping::Target (Default: {})
+# @param daemon_user
+#   User to run SmokePing
 #
-# [*daemon_user*]
-#   User to run SmokePing (Default: smokeping)
+# @param daemon_group
+#   Group of SmokePing
 #
-# [*daemon_group*]
-#   Group of SmokePing (Default: smokeping)
+# @param path_sendmail
+#   Path to sendmail binary
 #
-# [*path_sendmail*]
-#   Path to sendmail binary (Default: /usr/sbin/sendmail)
+# @param webserver_user
+#   User of webserver, owner of image-files
 #
-# [*webserver_user*]
-#   User of webserver, owner of image-files  (Default: www-data)
+# @param webserver_group
+#   Group of webserver
 #
-# [*webserver_group*]
-#   Group of webserver (Default: www-data)
+# @param path_imgcache
+#   Path to image cache dir
 #
-# [*path_imgcache*]
-#   Path to image cache dir (Default: /var/cache/smokeping/images)
+# @param path_imgurl
+#   URL path to images for CGI
 #
-# [*path_imgurl*]
-#   URL path to images for CGI (Default: ../smokeping/images)
+# @param path_datadir
+#   Path to smokeping data
 #
-# [*path_datadir*]
-#   Path to smokeping data (Default: /var/lib/smokeping)
+# @param path_piddir
+#   Path to PID file
 #
-# [*path_piddir*]
-#   Path to PID file (Default: /var/run/smokeping)
+# @param path_smokemail
+#   Path to smokemail binary
 #
-# [*path_smokemail*]
-#   Path to smokemail binary (Default: /etc/smokeping/smokemail)
+# @param path_tmail
+#   Path to tmail binary
 #
-# [*path_tmail*]
-#   Path to tmail binary (Default: /etc/smokeping/tmail)
+# @param version
+#   Version which should be installed
 #
-# [*version*]
-#   Version which should be installed (Default: present)
+# @param enable
+#   Should the service be enabled during boot time?
 #
-# [*enable*]
-#   Should the service be enabled during boot time? (Default: true)
+# @param start
+#   Should the service be started by Puppet?
 #
-# [*start*]
-#   Should the service be started by Puppet? (Default: true)
+# @param manage_apache
+#   Should we manage the Apache config with puppetlabs/apache?
 #
-# [*manage_apache*]
-#   Should we manage the Apache config with puppetlabs/apache? (Default: false)
+# @param manage_firewall
+#   Should we manage a firewall rule for Smokeping with puppetlabs/firewall?
 #
-# [*manage_firewall*]
-#   Should we manage a firewall rule for Smokeping with puppetlabs/firewall? (Default: false)
-#
-# [*manage_selinux*]
-#   Should we load an SELinux policy to allow Smokeping to work on Red Hat distros? (Default: false)
-#
-# === Author
-#
-# Tobias Brunner <tobias.brunner@nine.ch>
-#
+# @param manage_selinux
+#   Should we load an SELinux policy to allow Smokeping to work on Red Hat distros?
 class smokeping (
-  $mode               = $smokeping::params::mode,
-  $master_url         = $smokeping::params::master_url,
-  $shared_secret      = $smokeping::params::shared_secret,
-  $slave_secrets      = $smokeping::params::slave_secrets,
-  $slave_name         = $smokeping::params::slave_name,
-  $slave_dir          = $smokeping::params::slave_dir,
-  $slave_location     = $smokeping::params::slave_location,
-  $slave_display_name = $smokeping::params::slave_display_name,
-  $slave_color        = $smokeping::params::slave_color,
-  $webserver_user     = $smokeping::params::webserver_user,
-  $webserver_group    = $smokeping::params::webserver_group,
-  $package_perldoc    = $smokeping::params::package_perldoc,
-  $master_name        = $smokeping::params::master_name,
-  $owner              = $smokeping::params::owner,
-  $contact            = $smokeping::params::contact,
-  $mailhost           = $smokeping::params::mailhost,
-  $cgiurl             = $smokeping::params::cgiurl,
-  $syslogfacility     = $smokeping::params::syslogfacility,
-  $syslogpriority     = $smokeping::params::syslogpriority,
-  $probes             = $smokeping::params::probes,
-  $default_probe      = $smokeping::params::default_probe,
-  $alerts_to          = $smokeping::params::alerts_to,
-  $alerts_from        = $smokeping::params::alerts_from,
-  $alerts             = $smokeping::params::alerts,
-  $cgi_remark_top     = $smokeping::params::cgi_remark_top,
-  $cgi_title_top      = $smokeping::params::cgi_title_top,
-  $targets_dir        = $smokeping::params::targets_dir,
-  $targets            = $smokeping::params::targets,
-  $daemon_user        = $smokeping::params::daemon_user,
-  $daemon_group       = $smokeping::params::daemon_group,
-  $path_sendmail      = $smokeping::params::path_sendmail,
-  $path_imgcache      = $smokeping::params::path_imgcache,
-  $path_imgurl        = $smokeping::params::path_imgurl,
-  $path_datadir       = $smokeping::params::path_datadir,
-  $path_piddir        = $smokeping::params::path_piddir,
-  $path_smokemail     = $smokeping::params::path_smokemail,
-  $path_tmail         = $smokeping::params::path_tmail,
-  $version            = $smokeping::params::version,
-  $enable             = $smokeping::params::enable,
-  $start              = $smokeping::params::start,
-  $manage_apache      = $smokeping::params::manage_apache,
-  $manage_firewall    = $smokeping::params::manage_firewall,
-  $manage_selinux     = $smokeping::params::manage_selinux,
-  $servername         = $smokeping::params::servername,
-)  inherits smokeping::params {
+  Stdlib::HTTPUrl $cgiurl,
+  Stdlib::HTTPUrl $master_url,
+  String[1] $path_imgurl,
+  String[1] $daemon_user,
+  String[1] $daemon_group,
+  String[1] $webserver_user,
+  String[1] $webserver_group,
+  String[1] $package_perldoc,
+  Enum['master', 'slave', 'standalone'] $mode,
+  Stdlib::Absolutepath $shared_secret = '/etc/smokeping/slavesecrets.conf',
+  Stdlib::Absolutepath $slave_secrets = '/etc/smokeping/smokeping_secrets',
+  String[1] $slave_name = 'slave1',
+  Stdlib::Absolutepath $slave_dir = '/etc/smokeping/config.d/slaves.d',
+  Optional[String[1]] $slave_location = undef,
+  Optional[String[1]] $slave_display_name = undef,
+  Optional[String[1]] $slave_color = undef,
+  String[1] $master_name = 'default',
+  String[1] $owner = 'Peter Random',
+  Stdlib::Email $contact = 'root@localhost',
+  Optional[Stdlib::Host] $mailhost = undef,
+  Stdlib::Syslogfacility $syslogfacility = 'local0',
+  String[1] $syslogpriority = 'info',
+  Array[Hash] $probes = [],
+  String[1] $default_probe = 'FPing',
+  Stdlib::Email $alerts_to = 'root@localhost',
+  Stdlib::Email $alerts_from = 'root@localhost',
+  Array[Hash] $alerts = [
+    {
+      name        => 'someloss',
+      alert_type  => 'loss',
+      pattern     => '>0%,*12*,>0%,*12*,>0%',
+      edgetrigger => false,
+      comment     => 'loss 3 times in a row',
+    },
+  ],
+  String[1] $cgi_remark_top = 'Welcome to the SmokePing website of xxx Company. Here you will learn all about the latency of our network.',
+  String[1] $cgi_title_top = 'Network Latency Grapher',
+  Stdlib::Absolutepath $targets_dir = '/etc/smokeping/config.d/targets.d',
+  Hash $targets = {},
+  Stdlib::Absolutepath $path_sendmail = '/usr/sbin/sendmail',
+  Stdlib::Absolutepath $path_imgcache,
+  Stdlib::Absolutepath $path_datadir,
+  Stdlib::Absolutepath $path_piddir = '/var/run/smokeping',
+  Stdlib::Absolutepath $path_smokemail = '/etc/smokeping/smokemail',
+  Stdlib::Absolutepath $path_tmail = '/etc/smokeping/tmail',
+  String[1] $version = 'present',
+  Boolean $enable = true,
+  Boolean $start = true,
+  Boolean $manage_apache = false,
+  Boolean $manage_firewall = false,
+  Boolean $manage_selinux = false,
+  Stdlib::Fqdn $servername = $facts['networking']['fqdn'],
+) {
   if $manage_apache {
     include smokeping::apache
   }

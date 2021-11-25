@@ -1,4 +1,7 @@
+# @summary Manage SmokePing configuration
 class smokeping::config {
+  assert_private()
+
   $mode          = $smokeping::mode
   $master_url    = $smokeping::master_url
   $shared_secret = $smokeping::shared_secret
@@ -115,13 +118,6 @@ class smokeping::config {
         display_name => $display_name,
         color        => $slave_color,
       }
-      # periodic restart to pick-up new config
-      #cron {
-      #  'smokeping::periodic-restart':
-      #    command => 'PATH=$PATH:/sbin /etc/init.d/smokeping stop >/dev/null 2>&1; sleep 2; PATH=$PATH:/sbin /etc/init.d/smokeping start >/dev/null 2>&1',
-      #    user    => root,
-      #    minute  => '*/15';
-      #}
     }
     ## Master/Standalone configuration
     ## collect slaves if mode is master and create Targets
