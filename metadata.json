@@ -3,7 +3,7 @@
   "version": "5.1.2-rc0",
   "author": "Vox Pupuli",
   "license": "Apache-2.0",
-  "summary": "SmokePing module for master/slave or single instance",
+  "summary": "SmokePing module for master/slave or standalone instance",
   "source": "https://github.com/voxpupuli/puppet-smokeping.git",
   "project_page": "https://github.com/voxpupuli/puppet-smokeping",
   "issues_url": "https://github.com/voxpupuli/puppet-smokeping/issues",
