@@ -1,17 +1,16 @@
-# === Parameters
+# @summary SmokePing slave
 #
-# [*slave*]
+# @param slave
 #   Location of slave
 #
-# [*display_name*]
+# @param display_name
 #   Name of the slave
 #
-# [*color*]
+# @param color
 #   Color of this slave
 #
-# [*master*]
-#   Name of the smokeping master, in case there are more than one. (Default: default)
-#
+# @param master
+#   Name of the smokeping master, in case there are more than one.
 define smokeping::slave (
   $location,
   $display_name,

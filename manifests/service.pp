@@ -1,3 +1,4 @@
+# @summary Manage SmokePing service
 class smokeping::service {
   assert_private()
 

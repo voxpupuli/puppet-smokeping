@@ -1,3 +1,4 @@
+# @summary Manage SmokePing installation
 class smokeping::install {
   assert_private()
 

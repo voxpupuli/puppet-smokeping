@@ -1,4 +1,4 @@
-# Manage Apache config
+# @summary Manage Apache config
 class smokeping::apache {
   assert_private()
 

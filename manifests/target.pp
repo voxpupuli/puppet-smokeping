@@ -1,34 +1,34 @@
-# === Parameters
-# [*pagetitle*]
+# @summary SmokePing target
+#
+# @param pagetitle
 #   Title. If empty, menu will be used as Title
 #
-# [*menu*]
+# @param menu
 #   Menu name.
 #
-# [*hierarchy_level*]
-#   Level of this target on the menu hierarchy. (Default: 1)
+# @param hierarchy_level
+#   Level of this target on the menu hierarchy.
 #
-# [*hierarchy_parent*]
-#   If hierarchy_level > 1, this specifies the parent
+# @param hierarchy_parent
+#   If hierarchy_level > 1, this specifies the parent.
 #
-# [*probe*]
+# @param probe
 #   Which probe to use.
 #
-# [*host*]
+# @param host
 #   Target host name/IP.
 #
-# [*alerts*]
+# @param alerts
 #   Array of Alerts to apply to this target
 #
-# [*slaves*]
+# @param slaves
 #   Array of slaves on which to run this target
 #
-# [*nomasterpoll*]
+# @param nomasterpoll
 #   Disable data-polling from master
 #
-# [*remark*]
+# @param remark
 #   Remark displayed on Website
-#
 define smokeping::target (
   Optional[String[1]] $pagetitle        = undef,
   Optional[String[1]] $menu             = undef,

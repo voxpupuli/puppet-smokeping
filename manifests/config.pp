@@ -1,3 +1,4 @@
+# @summary Manage SmokePing configuration
 class smokeping::config {
   assert_private()
 

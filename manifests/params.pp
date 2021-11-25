@@ -1,8 +1,4 @@
-# == Class: smokeping::params
-#
-# This class manages Smokeping parameters.
-#
-
+# @summary SmokePing parameters
 class smokeping::params {
   assert_private()
 
