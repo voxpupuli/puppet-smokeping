@@ -1,0 +1,14 @@
+---
+smokeping::mode: master
+smokeping::daemon_user: smokeping
+smokeping::daemon_group: smokeping
+smokeping::path_imgcache: /var/cache/smokeping/images
+smokeping::path_imgurl: ../smokeping/images
+smokeping::path_datadir: /var/lib/smokeping
+smokeping::probes:
+  - name: FPing
+    binary: /usr/bin/fping
+    step: 300
+smokeping::webserver_user: www-data
+smokeping::webserver_group: www-data
+smokeping::package_perldoc: perl-doc
