@@ -1,4 +1,6 @@
 class smokeping::config {
+  assert_private()
+
   $mode          = $smokeping::mode
   $master_url    = $smokeping::master_url
   $shared_secret = $smokeping::shared_secret

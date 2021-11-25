@@ -4,6 +4,8 @@
 #
 
 class smokeping::params {
+  assert_private()
+
   $version            = 'present'
   $enable             = true
   $start              = true

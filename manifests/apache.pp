@@ -1,5 +1,7 @@
 # Manage Apache config
 class smokeping::apache {
+  assert_private()
+
   $servername = $smokeping::servername
 
   $docroot = $facts['os']['family'] ? {

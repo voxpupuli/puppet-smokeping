@@ -1,4 +1,6 @@
 class smokeping::service {
+  assert_private()
+
   $ensure = $smokeping::start ? {
     true    => running,
     false   => stopped,
