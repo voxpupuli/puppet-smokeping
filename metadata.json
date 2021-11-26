@@ -3,7 +3,7 @@
   "version": "5.1.2-rc0",
   "author": "Vox Pupuli",
   "license": "Apache-2.0",
-  "summary": "SmokePing module for master/slave or single instance",
+  "summary": "SmokePing module for master/slave or standalone instance",
   "source": "https://github.com/voxpupuli/puppet-smokeping.git",
   "project_page": "https://github.com/voxpupuli/puppet-smokeping",
   "issues_url": "https://github.com/voxpupuli/puppet-smokeping/issues",
@@ -15,9 +15,17 @@
   ],
   "operatingsystem_support": [
     {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "10",
+        "11"
+      ]
+    },
+    {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "14.04"
+        "18.04",
+        "20.04"
       ]
     },
     {
@@ -35,30 +43,18 @@
   ],
   "dependencies": [
     {
-      "name": "puppetlabs/apache",
-      "version_requirement": ">= 1.6.0 < 6.0.0"
-    },
-    {
       "name": "puppetlabs/concat",
       "version_requirement": ">= 4.1.0 < 7.0.0"
     },
     {
-      "name": "puppetlabs/firewall",
-      "version_requirement": ">= 1.7.0 < 3.0.0"
-    },
-    {
       "name": "puppetlabs/stdlib",
       "version_requirement": ">= 4.25.0 < 9.0.0"
-    },
-    {
-      "name": "puppet/selinux",
-      "version_requirement": ">= 1.0.0 < 4.0.0"
     }
   ],
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 5.5.8 < 7.0.0"
+      "version_requirement": ">= 5.5.8 < 8.0.0"
     }
   ]
 }
