@@ -29,6 +29,7 @@ Standalone only (no master/slave support yet):
 
 - [puppetlabs-concat](https://github.com/puppetlabs/puppet-concat)
 - [puppetlabs-stdlib](https://github.com/puppetlabs/puppet-stdlib)
+- [puppet-systemd](https://github.com/voxpupuli/puppet-systemd)
 
 ## Example
 

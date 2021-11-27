@@ -25,7 +25,7 @@
 #   Name of slave, displayed on Webpage
 #
 # @param slave_color
-#   Color of slave in the graph
+#   Color of slave in the graph, as a RRGGBB hex integer.
 #
 # @param master_name
 #   Name of the master, in case of more than one SmokePing Master/Slave
@@ -140,7 +140,7 @@ class smokeping (
   Stdlib::Absolutepath $slave_dir = '/etc/smokeping/config.d/slaves.d',
   Optional[String[1]] $slave_location = undef,
   Optional[String[1]] $slave_display_name = undef,
-  Optional[String[1]] $slave_color = undef,
+  Optional[Integer[0]] $slave_color = undef,
   String[1] $master_name = 'default',
   String[1] $owner = 'Peter Random',
   Stdlib::Email $contact = 'root@localhost',

@@ -5,3 +5,4 @@ fixtures:
     firewall: https://github.com/puppetlabs/puppetlabs-firewall
     concat: https://github.com/puppetlabs/puppetlabs-concat.git
     selinux: https://github.com/voxpupuli/puppet-selinux.git
+    systemd: https://github.com/voxpupuli/puppet-systemd.git

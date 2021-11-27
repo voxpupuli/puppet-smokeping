@@ -134,9 +134,9 @@ Default value: `undef`
 
 ##### <a name="-smokeping--slave_color"></a>`slave_color`
 
-Data type: `Optional[String[1]]`
+Data type: `Optional[Integer[0]]`
 
-Color of slave in the graph
+Color of slave in the graph, as a RRGGBB hex integer.
 
 Default value: `undef`
 
@@ -447,19 +447,21 @@ The following parameters are available in the `smokeping::slave` defined type:
 
 ##### <a name="-smokeping--slave--location"></a>`location`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 Location of slave
 
+Default value: `undef`
+
 ##### <a name="-smokeping--slave--display_name"></a>`display_name`
 
-Data type: `Any`
+Data type: `String[1]`
 
 Name of the slave
 
 ##### <a name="-smokeping--slave--color"></a>`color`
 
-Data type: `Any`
+Data type: `Integer[0]`
 
 Color of this slave
 

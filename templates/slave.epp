@@ -1,0 +1,8 @@
+# THIS FILE IS MANAGED BY PUPPET
+
++ <%= $slave_name %>
+display_name = <%= $display_name %>
+color = <%= sprintf("%x", $color) %>
+<% if $location { %>
+location = <%= $location %>
+<% } %>
