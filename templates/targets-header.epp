@@ -1,0 +1,11 @@
+*** Targets ***
+
+probe = <%= $smokeping::default_probe %>
+
+<% unless $smokeping::default_slaves.empty() { %>
+slaves = <%= $smokeping::default_slaves.join(' ') %>
+<% } %>
+
+menu = Top
+title = <%= $smokeping::cgi_title_top %>
+remark = <%= $smokeping::cgi_remark_top %>

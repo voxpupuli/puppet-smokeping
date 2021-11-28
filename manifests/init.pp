@@ -149,6 +149,7 @@ class smokeping (
   String[1] $syslogpriority = 'info',
   Array[Hash] $probes = [],
   String[1] $default_probe = 'FPing',
+  Array[String[1]] $default_slaves = [],
   Stdlib::Email $alerts_to = 'root@localhost',
   Stdlib::Email $alerts_from = 'root@localhost',
   Array[Hash] $alerts = [

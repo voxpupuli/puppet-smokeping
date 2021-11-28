@@ -70,6 +70,7 @@ The following parameters are available in the `smokeping` class:
 * [`manage_selinux`](#-smokeping--manage_selinux)
 * [`package_perldoc`](#-smokeping--package_perldoc)
 * [`syslogpriority`](#-smokeping--syslogpriority)
+* [`default_slaves`](#-smokeping--default_slaves)
 * [`servername`](#-smokeping--servername)
 
 ##### <a name="-smokeping--mode"></a>`mode`
@@ -405,6 +406,14 @@ Data type: `String[1]`
 
 
 Default value: `'info'`
+
+##### <a name="-smokeping--default_slaves"></a>`default_slaves`
+
+Data type: `Array[String[1]]`
+
+
+
+Default value: `[]`
 
 ##### <a name="-smokeping--servername"></a>`servername`
 
