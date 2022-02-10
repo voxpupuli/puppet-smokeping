@@ -122,6 +122,9 @@
 #
 # @param manage_selinux
 #   Should we load an SELinux policy to allow Smokeping to work on Red Hat distros?
+#
+# @param manage_datadir
+#   Should we manage the permissions on the data directory?
 class smokeping (
   Stdlib::HTTPUrl $cgiurl,
   Stdlib::HTTPUrl $master_url,
@@ -174,6 +177,7 @@ class smokeping (
   Boolean $manage_apache = false,
   Boolean $manage_firewall = false,
   Boolean $manage_selinux = false,
+  Boolean $manage_datadir = true,
   Stdlib::Fqdn $servername = $facts['networking']['fqdn'],
 ) {
   if $manage_apache {

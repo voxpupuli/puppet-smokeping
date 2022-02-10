@@ -14,12 +14,14 @@ class smokeping::install {
   }
 
   # correct permissions
-  file { $smokeping::path_datadir:
-    ensure  => directory,
-    owner   => $smokeping::daemon_user,
-    group   => $smokeping::daemon_group,
-    require => Package['smokeping'],
-    recurse => true,
+  if $smokeping::manage_datadir {
+    file { $smokeping::path_datadir:
+      ensure  => directory,
+      owner   => $smokeping::daemon_user,
+      group   => $smokeping::daemon_group,
+      require => Package['smokeping'],
+      recurse => true,
+    }
   }
   file { $smokeping::path_piddir:
     ensure  => directory,
