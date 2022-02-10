@@ -23,13 +23,15 @@ class smokeping::install {
     default => 'g+wX',
   }
 
-  file { $smokeping::path_datadir:
-    ensure  => directory,
-    owner   => $smokeping::daemon_user,
-    group   => $datadir_group,
-    mode    => $datadir_mode,
-    require => Package['smokeping'],
-    recurse => true,
+  if $smokeping::manage_datadir {
+    file { $smokeping::path_datadir:
+      ensure  => directory,
+      owner   => $smokeping::daemon_user,
+      group   => $datadir_group,
+      mode    => $datadir_mode,
+      require => Package['smokeping'],
+      recurse => true,
+    }
   }
 
   if $smokeping::mode =~ /(master|standalone)/ and $smokeping::manage_imgcache {

@@ -123,6 +123,9 @@
 # @param manage_selinux
 #   Should we load an SELinux policy to allow Smokeping to work on Red Hat distros?
 #
+# @param manage_datadir
+#   Should we manage the data directory?
+#
 # @param manage_imgcache
 #   Should we manage the permissions on the imgcache directory?
 class smokeping (
@@ -178,6 +181,7 @@ class smokeping (
   Boolean $manage_apache = false,
   Boolean $manage_firewall = false,
   Boolean $manage_selinux = false,
+  Boolean $manage_datadir = true,
   Boolean $manage_imgcache = true,
   Stdlib::Fqdn $servername = $facts['networking']['fqdn'],
 ) {

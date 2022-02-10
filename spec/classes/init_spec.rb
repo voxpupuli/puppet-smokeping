@@ -33,11 +33,30 @@ describe 'smokeping' do
               recurse: true
             )
           }
+
+          it {
+            is_expected.to contain_file('/var/lib/smokeping/rrd').with(
+              ensure: 'directory',
+              owner: 'root',
+              group: 'apache',
+              recurse: true
+            )
+          }
+
         when 'Debian'
           it {
             is_expected.to contain_file('/var/cache/smokeping/images').with(
               ensure: 'directory',
               owner: 'www-data',
+              group: 'www-data',
+              recurse: true
+            )
+          }
+
+          it {
+            is_expected.to contain_file('/var/lib/smokeping').with(
+              ensure: 'directory',
+              owner: 'smokeping',
               group: 'www-data',
               recurse: true
             )
@@ -54,25 +73,61 @@ describe 'smokeping' do
           }
         end
 
+        it { is_expected.to compile.with_all_deps }
+
         it {
           is_expected.to contain_file('/smokeping/images').with(
             ensure: 'directory',
             recurse: true
           )
         }
+      end
 
-        context "don't manage img_cachedir" do
-          let :params do
-            {
-              cgiurl: 'http://some.url/smokeping.cgi',
-              master_url: 'http://somewhere/cgi-bin/smokeping.cgi',
-              path_imgcache: '/smokeping/images',
-              manage_imgcache: false
-            }
-          end
-
-          it { is_expected.not_to contain_file('/smokeping/images') }
+      context 'change datadir' do
+        let :params do
+          {
+            cgiurl: 'http://some.url/smokeping.cgi',
+            master_url: 'http://somewhere/cgi-bin/smokeping.cgi',
+            path_datadir: '/smokeping/data'
+          }
         end
+
+        it { is_expected.to compile.with_all_deps }
+
+        it {
+          is_expected.to contain_file('/smokeping/data').with(
+            ensure: 'directory',
+            recurse: true
+          )
+        }
+      end
+
+      context "don't manage img_cachedir" do
+        let :params do
+          {
+            cgiurl: 'http://some.url/smokeping.cgi',
+            master_url: 'http://somewhere/cgi-bin/smokeping.cgi',
+            path_imgcache: '/smokeping/images',
+            manage_imgcache: false
+          }
+        end
+
+        it { is_expected.to compile.with_all_deps }
+        it { is_expected.not_to contain_file('/smokeping/images') }
+      end
+
+      context "don't manage datadir" do
+        let :params do
+          {
+            cgiurl: 'http://some.url/smokeping.cgi',
+            master_url: 'http://somewhere/cgi-bin/smokeping.cgi',
+            path_datadir: '/smokeping/data',
+            manage_datadir: false
+          }
+        end
+
+        it { is_expected.to compile.with_all_deps }
+        it { is_expected.not_to contain_file('/smokeping/data') }
       end
 
       context 'slave mode' do
