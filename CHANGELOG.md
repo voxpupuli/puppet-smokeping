@@ -4,6 +4,33 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v6.0.0](https://github.com/voxpupuli/puppet-smokeping/tree/v6.0.0) (2022-03-13)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-smokeping/compare/v5.1.1...v6.0.0)
+
+**Breaking changes:**
+
+- Add RHEL/CentOS 8 and remove EOL Puppet 5 [\#147](https://github.com/voxpupuli/puppet-smokeping/pull/147) ([yakatz](https://github.com/yakatz))
+- Remove optional module dependencies [\#140](https://github.com/voxpupuli/puppet-smokeping/pull/140) ([kenyon](https://github.com/kenyon))
+- Drop support for Ubuntu 14.04, add 18.04 and 20.04; add Debian 10 and 11 [\#139](https://github.com/voxpupuli/puppet-smokeping/pull/139) ([kenyon](https://github.com/kenyon))
+
+**Implemented enhancements:**
+
+- Convert from params.pp to defaults and Hiera [\#138](https://github.com/voxpupuli/puppet-smokeping/pull/138) ([kenyon](https://github.com/kenyon))
+
+**Closed issues:**
+
+- Use defaults from params.pp [\#72](https://github.com/voxpupuli/puppet-smokeping/issues/72)
+
+**Merged pull requests:**
+
+- Fix params that are now default undef [\#149](https://github.com/voxpupuli/puppet-smokeping/pull/149) ([waipeng](https://github.com/waipeng))
+- Add Puppet 7 support [\#141](https://github.com/voxpupuli/puppet-smokeping/pull/141) ([kenyon](https://github.com/kenyon))
+- README cleanup [\#137](https://github.com/voxpupuli/puppet-smokeping/pull/137) ([kenyon](https://github.com/kenyon))
+- Convert docs to Puppet Strings format [\#136](https://github.com/voxpupuli/puppet-smokeping/pull/136) ([kenyon](https://github.com/kenyon))
+- assert\_private\(\) in private classes [\#135](https://github.com/voxpupuli/puppet-smokeping/pull/135) ([kenyon](https://github.com/kenyon))
+- Allow stdlib 8.0.0 [\#133](https://github.com/voxpupuli/puppet-smokeping/pull/133) ([smortex](https://github.com/smortex))
+
 ## [v5.1.1](https://github.com/voxpupuli/puppet-smokeping/tree/v5.1.1) (2020-09-25)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-smokeping/compare/v5.1.0...v5.1.1)
