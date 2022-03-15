@@ -1,6 +1,6 @@
 # @summary SmokePing slave
 #
-# @param slave
+# @param location
 #   Location of slave
 #
 # @param display_name
