@@ -6,12 +6,12 @@ class smokeping::install {
     ensure => $smokeping::version,
   }
 
-  if ! defined (Package['fping']) {
-    ensure_packages(['fping'])
-  }
-  if ! defined (Package[$smokeping::package_perldoc]) {
-    ensure_packages([$smokeping::package_perldoc])
-  }
+  ensure_packages(
+    [
+      'fping',
+      $smokeping::package_perldoc,
+    ],
+  )
 
   $datadir_group = $smokeping::mode ? {
     'slave' => $smokeping::daemon_group,
