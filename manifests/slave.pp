@@ -12,34 +12,44 @@
 # @param master
 #   Name of the smokeping master, in case there are more than one.
 define smokeping::slave (
-  $location,
-  $display_name,
-  $color,
+  String[1] $display_name,
+  Integer[0] $color,
+  Optional[String[1]] $location = undef,
   $master = 'default',
 ) {
   File {
-    owner   => root,
-    group   => root,
-    mode    => '0644',
+    owner => root,
+    group => root,
+    mode  => '0644',
   }
 
-  $random_value = fqdn_rand_string(60, 'abcdefghjkelmnopqrstuvwxyaABCDEFGHJKELMNOPQRSTUVWXYA0123456789')
+  $random_value = fqdn_rand_string(60)
+
   file { $smokeping::shared_secret:
     mode    => '0600',
     owner   => $smokeping::daemon_user,
     group   => $smokeping::daemon_group,
     content => $random_value,
   }
+
   @@concat::fragment { "${facts['networking']['fqdn']}-secret":
     target  => $smokeping::slave_secrets,
     order   => 10,
-    content => "${facts['networking']['fqdn']}:${random_value}\n",
+    content => "${facts['networking']['hostname']}:${random_value}\n",
     tag     => "smokeping-slave-secret-${master}",
   }
 
   $filename = "${smokeping::slave_dir}/${facts['networking']['fqdn']}"
+
   @@file { $filename:
-    content => template('smokeping/slave.erb'),
+    content => epp("${module_name}/slave.epp",
+      {
+        'slave_name'   => $title,
+        'display_name' => $display_name,
+        'color'        => $color,
+        'location'     => $location,
+      }
+    ),
     tag     => "smokeping-slave-${master}",
   }
 

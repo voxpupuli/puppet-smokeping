@@ -4,7 +4,6 @@ class smokeping::config {
 
   $mode          = $smokeping::mode
   $master_url    = $smokeping::master_url
-  $shared_secret = $smokeping::shared_secret
   $slave_name    = $smokeping::slave_name
   $master_name   = $smokeping::master_name
 
@@ -34,7 +33,6 @@ class smokeping::config {
   $default_probe  = $smokeping::default_probe
   $cgi_remark_top = $smokeping::cgi_remark_top
   $cgi_title_top  = $smokeping::cgi_title_top
-  $targets        = $smokeping::targets
 
   # Pathnames
   $path_sendmail  = $smokeping::path_sendmail
@@ -75,60 +73,51 @@ class smokeping::config {
       content => template('smokeping/probes.erb');
   }
 
-  ## Platform Specific
-  if $facts['os']['family'] == 'Debian' or $facts['os']['name'] == 'Ubuntu' {
-    # Defaults file allows smokeping to be launched in different modes (eg slave vs master)
-    file { '/etc/default/smokeping':
-      content => template('smokeping/defaults.erb');
-    }
-  } else {
-    # TODO: Add master/slave support to non-Debian distros
-    #
-    # We don't yet support modes other than standalone on other platforms
-    # such as RHEL - to offer it, we need to start replacing the systemd
-    # service file loaded by the package manager with a custom one that
-    # has the alternative parameters set, like in the default file above
-    # for Debian/Ubuntu systems.
-
-    if ($mode != 'standalone') {
-      fail('Currently master/slave mode not supported for this OS family')
-    }
-  }
-
   ## mode specific
   case $mode {
-    ## Slave configuration
     'slave': {
-      # Check if slave_display_name is unset.
-      # --> use FQDN if not set.
-      $display_name = pick($smokeping::slave_display_name, $facts['networking']['fqdn'])
-
-      $slave_color = pick($smokeping::slave_color, sprintf('%06d', fqdn_rand('999999')))
-
-      smokeping::slave { $facts['networking']['fqdn']:
+      smokeping::slave { $facts['networking']['hostname']:
         location     => $smokeping::slave_location,
-        display_name => $display_name,
-        color        => $slave_color,
+        display_name => pick($smokeping::slave_display_name, $facts['networking']['hostname']),
+        color        => pick($smokeping::slave_color, fqdn_rand(0xffffff)),
+      }
+
+      $dropin = @("EOT")
+        [Service]
+        ExecStart=
+        ExecStart=/usr/sbin/smokeping --master-url=${smokeping::master_url} --cache-dir=${smokeping::path_datadir} --shared-secret=${smokeping::shared_secret} --pid-dir=/run/smokeping
+        | EOT
+
+      systemd::dropin_file { 'slave.conf':
+        unit    => 'smokeping.service',
+        content => $dropin,
       }
     }
+
     ## Master/Standalone configuration
     ## collect slaves if mode is master and create Targets
     ## if mode is standalone, just create targets...
     /^(master|standalone)$/: {
-      if $mode =~ /^master$/ {
+      if $mode == 'master' {
         # collect slaves
         File <<| tag == "smokeping-slave-${master_name}" |>>
-        file { $smokeping::slave_dir: ensure => directory; }
+
+        file { $smokeping::slave_dir:
+          ensure => directory,
+        }
+
         concat { '/etc/smokeping/config.d/Slaves':
           owner => root,
           group => root,
           mode  => '0644',
         }
+
         concat::fragment { 'slaves-header':
           target  => '/etc/smokeping/config.d/Slaves',
           order   => 10,
           content => "*** Slaves ***\nsecrets=${smokeping::slave_secrets}\n\n",
         }
+
         Concat::Fragment <<| tag == "smokeping-slave-${master_name}" |>>
 
         # collect shared secrets from slaves
@@ -137,9 +126,9 @@ class smokeping::config {
           group => $webserver_group,
           mode  => '0640',
         }
+
         Concat::Fragment <<| tag == "smokeping-slave-secret-${master_name}" |>>
       } else {
-        # ensure $smokeping::slave_secret is there
         file { $smokeping::slave_secrets:
           ensure => file,
           owner  => $daemon_user,
@@ -155,18 +144,28 @@ class smokeping::config {
         purge   => true,
         force   => true,
       }
+
       concat { '/etc/smokeping/config.d/Targets':
         owner => root,
         group => root,
         mode  => '0644',
       }
+
       concat::fragment { 'targets-header':
         target  => '/etc/smokeping/config.d/Targets',
         order   => 10,
         content => template('smokeping/targets-header.erb'),
       }
-      create_resources('smokeping::target', $targets, {})
+
+      $smokeping::targets.each |$key, $value| {
+        smokeping::target { $key:
+          * => $value,
+        }
+      }
     }
-    default: { fail("mode ${mode} unknown") }
+
+    default: {
+      fail("mode ${mode} unknown")
+    }
   }
 }
