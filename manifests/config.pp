@@ -29,11 +29,6 @@ class smokeping::config {
   $alerts_from = $smokeping::alerts_from
   $alerts      = $smokeping::alerts
 
-  # Targets
-  $default_probe  = $smokeping::default_probe
-  $cgi_remark_top = $smokeping::cgi_remark_top
-  $cgi_title_top  = $smokeping::cgi_title_top
-
   # Pathnames
   $path_sendmail  = $smokeping::path_sendmail
   $path_imgcache  = $smokeping::path_imgcache
@@ -154,7 +149,7 @@ class smokeping::config {
       concat::fragment { 'targets-header':
         target  => '/etc/smokeping/config.d/Targets',
         order   => 10,
-        content => template('smokeping/targets-header.erb'),
+        content => epp("${module_name}/targets-header.epp"),
       }
 
       $smokeping::targets.each |$key, $value| {

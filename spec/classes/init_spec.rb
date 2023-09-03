@@ -36,6 +36,15 @@ describe 'smokeping' do
         it { is_expected.to contain_smokeping__slave(facts[:hostname]).with_color(0xabcdef) }
         it { is_expected.to contain_systemd__dropin_file('slave.conf').with_unit('smokeping.service') }
       end
+
+      context 'with default slaves' do
+        let :params do
+          super().merge(default_slaves: %w[slv1 slv2])
+        end
+
+        it { is_expected.to compile.with_all_deps }
+        it { is_expected.to contain_concat__fragment('targets-header').with_content(%r{slaves = slv1 slv2}) }
+      end
     end
   end
 end
