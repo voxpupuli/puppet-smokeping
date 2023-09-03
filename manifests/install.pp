@@ -32,7 +32,7 @@ class smokeping::install {
     recurse => true,
   }
 
-  if $smokeping::mode =~ /(master|standalone)/ {
+  if $smokeping::mode =~ /(master|standalone)/ and $smokeping::manage_imgcache {
     file { $smokeping::path_imgcache:
       ensure  => directory,
       owner   => $smokeping::webserver_user,

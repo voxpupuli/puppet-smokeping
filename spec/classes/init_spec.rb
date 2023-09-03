@@ -22,6 +22,57 @@ describe 'smokeping' do
         it { is_expected.to contain_class('smokeping::install') }
         it { is_expected.to contain_class('smokeping::service') }
         it { is_expected.to contain_class('smokeping::config') }
+
+        case facts[:osfamily]
+        when 'RedHat'
+          it {
+            is_expected.to contain_file('/var/lib/smokeping/images').with(
+              ensure: 'directory',
+              owner: 'apache',
+              group: 'apache',
+              recurse: true
+            )
+          }
+        when 'Debian'
+          it {
+            is_expected.to contain_file('/var/cache/smokeping/images').with(
+              ensure: 'directory',
+              owner: 'www-data',
+              group: 'www-data',
+              recurse: true
+            )
+          }
+        end
+      end
+
+      context 'change img_cachedir' do
+        let :params do
+          {
+            cgiurl: 'http://some.url/smokeping.cgi',
+            master_url: 'http://somewhere/cgi-bin/smokeping.cgi',
+            path_imgcache: '/smokeping/images'
+          }
+        end
+
+        it {
+          is_expected.to contain_file('/smokeping/images').with(
+            ensure: 'directory',
+            recurse: true
+          )
+        }
+
+        context "don't manage img_cachedir" do
+          let :params do
+            {
+              cgiurl: 'http://some.url/smokeping.cgi',
+              master_url: 'http://somewhere/cgi-bin/smokeping.cgi',
+              path_imgcache: '/smokeping/images',
+              manage_imgcache: false
+            }
+          end
+
+          it { is_expected.not_to contain_file('/smokeping/images') }
+        end
       end
 
       context 'slave mode' do
