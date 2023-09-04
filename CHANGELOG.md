@@ -4,7 +4,36 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v6.0.0](https://github.com/voxpupuli/puppet-smokeping/tree/v6.0.0) (2022-03-13)
+## [v7.0.0](https://github.com/voxpupuli/puppet-smokeping/tree/v7.0.0) (2023-09-04)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-smokeping/compare/v6.0.0...v7.0.0)
+
+**Breaking changes:**
+
+- Drop EoL Ubuntu 18.04 [\#160](https://github.com/voxpupuli/puppet-smokeping/pull/160) ([kenyon](https://github.com/kenyon))
+- metadata.json: require at least stdlib 7.0.0 [\#158](https://github.com/voxpupuli/puppet-smokeping/pull/158) ([kenyon](https://github.com/kenyon))
+- Drop Puppet 6 support [\#155](https://github.com/voxpupuli/puppet-smokeping/pull/155) ([bastelfreak](https://github.com/bastelfreak))
+- Configure slaves with systemd [\#142](https://github.com/voxpupuli/puppet-smokeping/pull/142) ([kenyon](https://github.com/kenyon))
+
+**Implemented enhancements:**
+
+- Add Ubuntu 22.04 support [\#161](https://github.com/voxpupuli/puppet-smokeping/pull/161) ([kenyon](https://github.com/kenyon))
+- Add option for management of datadir [\#159](https://github.com/voxpupuli/puppet-smokeping/pull/159) ([kenyon](https://github.com/kenyon))
+- Add Puppet 8 support [\#157](https://github.com/voxpupuli/puppet-smokeping/pull/157) ([bastelfreak](https://github.com/bastelfreak))
+- puppetlabs/stdlib: Allow 9.x [\#156](https://github.com/voxpupuli/puppet-smokeping/pull/156) ([bastelfreak](https://github.com/bastelfreak))
+- Add option to manage imgcache directory [\#146](https://github.com/voxpupuli/puppet-smokeping/pull/146) ([yakatz](https://github.com/yakatz))
+- Add `default_slaves` parameter for the `Targets` section [\#143](https://github.com/voxpupuli/puppet-smokeping/pull/143) ([kenyon](https://github.com/kenyon))
+
+**Fixed bugs:**
+
+- Wrong version in stdlib dependency [\#154](https://github.com/voxpupuli/puppet-smokeping/issues/154)
+
+**Closed issues:**
+
+- Managing too many files [\#145](https://github.com/voxpupuli/puppet-smokeping/issues/145)
+- Module needs rspec puppet tests [\#54](https://github.com/voxpupuli/puppet-smokeping/issues/54)
+
+## [v6.0.0](https://github.com/voxpupuli/puppet-smokeping/tree/v6.0.0) (2022-03-15)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-smokeping/compare/v5.1.1...v6.0.0)
 
@@ -16,6 +45,7 @@ These should not affect the functionality of the module.
 
 **Implemented enhancements:**
 
+- Add Puppet 7 support [\#141](https://github.com/voxpupuli/puppet-smokeping/pull/141) ([kenyon](https://github.com/kenyon))
 - Convert from params.pp to defaults and Hiera [\#138](https://github.com/voxpupuli/puppet-smokeping/pull/138) ([kenyon](https://github.com/kenyon))
 
 **Closed issues:**
@@ -25,7 +55,6 @@ These should not affect the functionality of the module.
 **Merged pull requests:**
 
 - Fix params that are now default undef [\#149](https://github.com/voxpupuli/puppet-smokeping/pull/149) ([waipeng](https://github.com/waipeng))
-- Add Puppet 7 support [\#141](https://github.com/voxpupuli/puppet-smokeping/pull/141) ([kenyon](https://github.com/kenyon))
 - README cleanup [\#137](https://github.com/voxpupuli/puppet-smokeping/pull/137) ([kenyon](https://github.com/kenyon))
 - Convert docs to Puppet Strings format [\#136](https://github.com/voxpupuli/puppet-smokeping/pull/136) ([kenyon](https://github.com/kenyon))
 - assert\_private\(\) in private classes [\#135](https://github.com/voxpupuli/puppet-smokeping/pull/135) ([kenyon](https://github.com/kenyon))
