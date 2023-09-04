@@ -68,6 +68,7 @@ The following parameters are available in the `smokeping` class:
 * [`manage_apache`](#-smokeping--manage_apache)
 * [`manage_firewall`](#-smokeping--manage_firewall)
 * [`manage_selinux`](#-smokeping--manage_selinux)
+* [`manage_datadir`](#-smokeping--manage_datadir)
 * [`manage_imgcache`](#-smokeping--manage_imgcache)
 * [`package_perldoc`](#-smokeping--package_perldoc)
 * [`syslogpriority`](#-smokeping--syslogpriority)
@@ -393,6 +394,14 @@ Data type: `Boolean`
 Should we load an SELinux policy to allow Smokeping to work on Red Hat distros?
 
 Default value: `false`
+
+##### <a name="-smokeping--manage_datadir"></a>`manage_datadir`
+
+Data type: `Boolean`
+
+Should we manage the data directory?
+
+Default value: `true`
 
 ##### <a name="-smokeping--manage_imgcache"></a>`manage_imgcache`
 

@@ -6,12 +6,12 @@ class smokeping::install {
     ensure => $smokeping::version,
   }
 
-  if ! defined (Package['fping']) {
-    ensure_packages(['fping'])
-  }
-  if ! defined (Package[$smokeping::package_perldoc]) {
-    ensure_packages([$smokeping::package_perldoc])
-  }
+  ensure_packages(
+    [
+      'fping',
+      $smokeping::package_perldoc,
+    ],
+  )
 
   $datadir_group = $smokeping::mode ? {
     'slave' => $smokeping::daemon_group,
@@ -23,13 +23,15 @@ class smokeping::install {
     default => 'g+wX',
   }
 
-  file { $smokeping::path_datadir:
-    ensure  => directory,
-    owner   => $smokeping::daemon_user,
-    group   => $datadir_group,
-    mode    => $datadir_mode,
-    require => Package['smokeping'],
-    recurse => true,
+  if $smokeping::manage_datadir {
+    file { $smokeping::path_datadir:
+      ensure  => directory,
+      owner   => $smokeping::daemon_user,
+      group   => $datadir_group,
+      mode    => $datadir_mode,
+      require => Package['smokeping'],
+      recurse => true,
+    }
   }
 
   if $smokeping::mode =~ /(master|standalone)/ and $smokeping::manage_imgcache {
