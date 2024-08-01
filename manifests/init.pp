@@ -128,6 +128,12 @@
 #
 # @param manage_imgcache
 #   Should we manage the permissions on the imgcache directory?
+#
+# @param databasestep
+#   The stepsize to configure the RRD Database files with. You must delete the RRD files if you change this later.
+#
+# @param databasepings
+#   The number of pings to be able to store in the RRD Database files.
 class smokeping (
   Stdlib::HTTPUrl $cgiurl,
   Stdlib::HTTPUrl $master_url,
@@ -184,6 +190,8 @@ class smokeping (
   Boolean $manage_datadir = true,
   Boolean $manage_imgcache = true,
   Stdlib::Fqdn $servername = $facts['networking']['fqdn'],
+  Integer $databasestep = 300,
+  Integer $databasepings = 20,
 ) {
   if $manage_apache {
     include smokeping::apache

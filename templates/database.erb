@@ -1,7 +1,18 @@
 *** Database ***
 
+# THIS FILE IS MANAGED BY PUPPET
+
+<% if @databasestep -%>
+step     = <%= @databasestep %>
+<% else -%>
 step     = 300
+<% end -%>
+
+<% if @databasepings -%>
+pings    = <%= @databasepings %>
+<% else -%>
 pings    = 20
+<% end -%>
 
 # consfn mrhb steps total
 

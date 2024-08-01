@@ -70,6 +70,8 @@ The following parameters are available in the `smokeping` class:
 * [`manage_selinux`](#-smokeping--manage_selinux)
 * [`manage_datadir`](#-smokeping--manage_datadir)
 * [`manage_imgcache`](#-smokeping--manage_imgcache)
+* [`databasestep`](#-smokeping--databasestep)
+* [`databasepings`](#-smokeping--databasepings)
 * [`package_perldoc`](#-smokeping--package_perldoc)
 * [`syslogpriority`](#-smokeping--syslogpriority)
 * [`default_slaves`](#-smokeping--default_slaves)
@@ -410,6 +412,22 @@ Data type: `Boolean`
 Should we manage the permissions on the imgcache directory?
 
 Default value: `true`
+
+##### <a name="-smokeping--databasestep"></a>`databasestep`
+
+Data type: `Integer`
+
+The stepsize to configure the RRD Database files with. You must delete the RRD files if you change this later.
+
+Default value: `300`
+
+##### <a name="-smokeping--databasepings"></a>`databasepings`
+
+Data type: `Integer`
+
+The number of pings to be able to store in the RRD Database files.
+
+Default value: `20`
 
 ##### <a name="-smokeping--package_perldoc"></a>`package_perldoc`
 

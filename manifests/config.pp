@@ -16,6 +16,8 @@ class smokeping::config {
   $syslogpriority = $smokeping::syslogpriority
   $daemon_user    = $smokeping::daemon_user
   $daemon_group   = $smokeping::daemon_group
+  $databasestep   = $smokeping::databasestep
+  $databasepings  = $smokeping::databasepings
 
   # The owner of the image files (written by the webserver)
   $webserver_user  = $smokeping::webserver_user
