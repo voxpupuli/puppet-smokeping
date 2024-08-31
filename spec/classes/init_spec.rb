@@ -139,7 +139,7 @@ describe 'smokeping' do
         end
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_smokeping__slave(facts[:hostname]).with_color(0xabcdef) }
+        it { is_expected.to contain_smokeping__slave(facts[:networking]['hostname']).with_color(0xabcdef) }
         it { is_expected.to contain_systemd__dropin_file('slave.conf').with_unit('smokeping.service') }
       end
 
