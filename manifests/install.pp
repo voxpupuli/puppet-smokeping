@@ -6,7 +6,7 @@ class smokeping::install {
     ensure => $smokeping::version,
   }
 
-  ensure_packages(
+  stdlib::ensure_packages(
     [
       'fping',
       $smokeping::package_perldoc,
