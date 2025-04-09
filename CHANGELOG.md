@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v8.0.0](https://github.com/voxpupuli/puppet-smokeping/tree/v8.0.0) (2025-04-09)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-smokeping/compare/v7.0.0...v8.0.0)
+
+**Breaking changes:**
+
+- Require stdlib 9.x [\#178](https://github.com/voxpupuli/puppet-smokeping/pull/178) ([kenyon](https://github.com/kenyon))
+
+**Implemented enhancements:**
+
+- metadata.json: Add OpenVox [\#180](https://github.com/voxpupuli/puppet-smokeping/pull/180) ([jstraw](https://github.com/jstraw))
+- puppet/systemd: Allow 6.x [\#166](https://github.com/voxpupuli/puppet-smokeping/pull/166) ([zilchms](https://github.com/zilchms))
+- puppetlabs/concat: Allow 9.x [\#165](https://github.com/voxpupuli/puppet-smokeping/pull/165) ([zilchms](https://github.com/zilchms))
+
+**Fixed bugs:**
+
+- Fix specifying `slave_name` [\#181](https://github.com/voxpupuli/puppet-smokeping/pull/181) ([sorrison](https://github.com/sorrison))
+
+**Merged pull requests:**
+
+- puppet/systemd: allow 8.x [\#176](https://github.com/voxpupuli/puppet-smokeping/pull/176) ([jay7x](https://github.com/jay7x))
+- update puppet-systemd upper bound to 8.0.0 [\#169](https://github.com/voxpupuli/puppet-smokeping/pull/169) ([TheMeier](https://github.com/TheMeier))
+
 ## [v7.0.0](https://github.com/voxpupuli/puppet-smokeping/tree/v7.0.0) (2023-09-04)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-smokeping/compare/v6.0.0...v7.0.0)
