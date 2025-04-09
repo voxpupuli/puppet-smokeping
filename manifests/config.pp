@@ -71,7 +71,7 @@ class smokeping::config {
   ## mode specific
   case $mode {
     'slave': {
-      smokeping::slave { $facts['networking']['hostname']:
+      smokeping::slave { $smokeping::slave_name:
         location     => $smokeping::slave_location,
         display_name => pick($smokeping::slave_display_name, $facts['networking']['hostname']),
         color        => pick($smokeping::slave_color, fqdn_rand(0xffffff)),
@@ -80,7 +80,7 @@ class smokeping::config {
       $dropin = @("EOT")
         [Service]
         ExecStart=
-        ExecStart=/usr/sbin/smokeping --master-url=${smokeping::master_url} --cache-dir=${smokeping::path_datadir} --shared-secret=${smokeping::shared_secret} --pid-dir=/run/smokeping
+        ExecStart=/usr/sbin/smokeping --master-url=${smokeping::master_url} --cache-dir=${smokeping::path_datadir} --shared-secret=${smokeping::shared_secret} --slave-name=${smokeping::slave_name} --pid-dir=/run/smokeping
         | EOT
 
       systemd::dropin_file { 'slave.conf':
