@@ -142,7 +142,7 @@ class smokeping (
   Enum['master', 'slave', 'standalone'] $mode,
   Stdlib::Absolutepath $shared_secret = '/etc/smokeping/slavesecrets.conf',
   Stdlib::Absolutepath $slave_secrets = '/etc/smokeping/smokeping_secrets',
-  String[1] $slave_name = 'slave1',
+  String[1] $slave_name = $facts['networking']['hostname'],
   Stdlib::Absolutepath $slave_dir = '/etc/smokeping/config.d/slaves.d',
   Optional[String[1]] $slave_location = undef,
   Optional[String[1]] $slave_display_name = undef,

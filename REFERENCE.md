@@ -109,7 +109,7 @@ Data type: `String[1]`
 
 Name of slave. Only used in slave mode
 
-Default value: `'slave1'`
+Default value: `$facts['networking']['hostname']`
 
 ##### <a name="-smokeping--slave_dir"></a>`slave_dir`
 
