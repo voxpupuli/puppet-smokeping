@@ -17,7 +17,6 @@
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "10",
         "11",
         "12"
       ]
@@ -25,8 +24,8 @@
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "20.04",
-        "22.04"
+        "22.04",
+        "24.04"
       ]
     },
     {
@@ -55,7 +54,7 @@
     },
     {
       "name": "puppet/systemd",
-      "version_requirement": ">= 3.5.1 < 9.0.0"
+      "version_requirement": ">= 3.5.1 < 10.0.0"
     }
   ],
   "requirements": [
