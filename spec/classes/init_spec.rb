@@ -30,7 +30,7 @@ describe 'smokeping' do
               ensure: 'directory',
               owner: 'apache',
               group: 'apache',
-              recurse: true
+              recurse: true,
             )
           }
 
@@ -39,7 +39,7 @@ describe 'smokeping' do
               ensure: 'directory',
               owner: 'root',
               group: 'apache',
-              recurse: true
+              recurse: true,
             )
           }
 
@@ -49,7 +49,7 @@ describe 'smokeping' do
               ensure: 'directory',
               owner: 'www-data',
               group: 'www-data',
-              recurse: true
+              recurse: true,
             )
           }
 
@@ -58,7 +58,7 @@ describe 'smokeping' do
               ensure: 'directory',
               owner: 'smokeping',
               group: 'www-data',
-              recurse: true
+              recurse: true,
             )
           }
         end
@@ -69,7 +69,7 @@ describe 'smokeping' do
           {
             cgiurl: 'http://some.url/smokeping.cgi',
             master_url: 'http://somewhere/cgi-bin/smokeping.cgi',
-            path_imgcache: '/smokeping/images'
+            path_imgcache: '/smokeping/images',
           }
         end
 
@@ -78,7 +78,7 @@ describe 'smokeping' do
         it {
           is_expected.to contain_file('/smokeping/images').with(
             ensure: 'directory',
-            recurse: true
+            recurse: true,
           )
         }
       end
@@ -88,7 +88,7 @@ describe 'smokeping' do
           {
             cgiurl: 'http://some.url/smokeping.cgi',
             master_url: 'http://somewhere/cgi-bin/smokeping.cgi',
-            path_datadir: '/smokeping/data'
+            path_datadir: '/smokeping/data',
           }
         end
 
@@ -97,7 +97,7 @@ describe 'smokeping' do
         it {
           is_expected.to contain_file('/smokeping/data').with(
             ensure: 'directory',
-            recurse: true
+            recurse: true,
           )
         }
       end
@@ -108,7 +108,7 @@ describe 'smokeping' do
             cgiurl: 'http://some.url/smokeping.cgi',
             master_url: 'http://somewhere/cgi-bin/smokeping.cgi',
             path_imgcache: '/smokeping/images',
-            manage_imgcache: false
+            manage_imgcache: false,
           }
         end
 
@@ -122,7 +122,7 @@ describe 'smokeping' do
             cgiurl: 'http://some.url/smokeping.cgi',
             master_url: 'http://somewhere/cgi-bin/smokeping.cgi',
             path_datadir: '/smokeping/data',
-            manage_datadir: false
+            manage_datadir: false,
           }
         end
 
@@ -134,7 +134,7 @@ describe 'smokeping' do
         let :params do
           super().merge(
             mode: 'slave',
-            slave_color: 0xabcdef
+            slave_color: 0xabcdef,
           )
         end
 
